@@ -1,8 +1,7 @@
 import './globals.css';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import TargetCursor from '@/components/TargetCursor';
 import SmoothScroll from '@/components/SmoothScroll';
+import LayoutWrapper from '@/components/LayoutWrapper';
 
 export const metadata = {
   title: 'ReCharge - Kenali Batas, Sebelum Terlambat',
@@ -19,11 +18,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           hoverDuration={0.2}
         />
         <SmoothScroll>
-          <Navbar />
-          <main className="flex-grow pt-32">
+          <LayoutWrapper>
             {children}
-          </main>
-          <Footer />
+          </LayoutWrapper>
         </SmoothScroll>
       </body>
     </html>

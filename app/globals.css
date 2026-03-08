@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Geometric415Lite';
+  src: url('./fonts/geometric-415-lite.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'TTCommonsLight';
+  src: url('./fonts/TTCommonsLight.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
 @layer base {
   body {
     background-color: theme('colors.floral-white');
