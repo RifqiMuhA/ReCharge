@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@studio-freight/react-lenis": "^0.0.47",
+    "dotted-map": "^3.1.0",
     "gsap": "^3.14.2",
+    "motion": "^12.35.2",
     "next": "14.2.35",
+    "next-themes": "^0.4.6",
     "react": "^18",
     "react-dom": "^18"
   },
