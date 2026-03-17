@@ -1,8 +1,7 @@
 import HeroSection from './_sections/HeroSection';
+import FamiliarSection from './_sections/FamiliarSection';
 import MirrorSection from './_sections/MirrorSection';
 import DiagnosisSection from './_sections/DiagnosisSection';
-import SolutionSection from './_sections/SolutionSection';
-import TestimonialSection from './_sections/TestimonialSection';
 import CtaSection from './_sections/CtaSection';
 
 export const metadata = {
@@ -15,10 +14,9 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      {/* <FamiliarSection /> */}
       <MirrorSection />
       <DiagnosisSection />
-      <SolutionSection />
-      <TestimonialSection />
       <CtaSection />
     </>
   );
