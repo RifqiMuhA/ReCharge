@@ -12,11 +12,13 @@ interface MapProps {
         end: { lat: number; lng: number; label?: string; imageUrl?: string };
     }>;
     lineColor?: string;
+    onDotClick?: (dot: { lat: number; lng: number; label?: string; imageUrl?: string }) => void;
 }
 
 export default function WorldMap({
     dots = [],
     lineColor = "#0ea5e9", // We will likely override this via props to match ReCharge theme
+    onDotClick,
 }: MapProps) {
     const svgRef = useRef<SVGSVGElement>(null);
     const map = new DottedMap({ height: 100, grid: "diagonal" });
@@ -24,6 +26,10 @@ export default function WorldMap({
     const { theme } = useTheme();
     const [hoveredDot, setHoveredDot] = useState<{ x: number, y: number, imageUrl: string, label?: string } | null>(null);
     const [lastHovered, setLastHovered] = useState<{ x: number, y: number, imageUrl: string, label?: string } | null>(null);
+    const [hoveredDotKey, setHoveredDotKey] = useState<string | null>(null);
+
+    const DOT_DEFAULT = '#FFABD2';  // blush-pop pink
+    const DOT_HOVER = '#15221b';    // pine-teal
 
     const handleHover = (dotPoint: { lat: number; lng: number; imageUrl?: string; label?: string }) => {
         if (dotPoint.imageUrl) {
@@ -111,33 +117,35 @@ export default function WorldMap({
                     <g key={`points-group-${i}`}>
                         <g
                             key={`start-${i}`}
-                            onMouseEnter={() => handleHover(dot.start)}
-                            onMouseLeave={() => setHoveredDot(null)}
+                            onMouseEnter={() => { handleHover(dot.start); setHoveredDotKey(`start-${i}`); }}
+                            onMouseLeave={() => { setHoveredDot(null); setHoveredDotKey(null); }}
+                            onClick={() => onDotClick && dot.start.imageUrl && onDotClick(dot.start)}
                             className={dot.start.imageUrl ? "cursor-pointer pointer-events-auto" : "pointer-events-auto"}
                         >
                             <circle
                                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                                r={dot.start.imageUrl ? "10" : "2"} // larger hit area if hoverable, make it transparent if needed. Let's make a transparent hit area.
+                                r={dot.start.imageUrl ? "14" : "4"}
                                 fill="transparent"
                             />
                             <circle
                                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                                r="2"
-                                fill={lineColor}
+                                r="4"
+                                fill={hoveredDotKey === `start-${i}` ? DOT_HOVER : DOT_DEFAULT}
+                                style={{ transition: 'fill 0.3s' }}
                             />
                             <circle
                                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
-                                r="2"
-                                fill={lineColor}
+                                r="4"
+                                fill={hoveredDotKey === `start-${i}` ? DOT_HOVER : DOT_DEFAULT}
                                 opacity="0.5"
                             >
                                 <animate
                                     attributeName="r"
-                                    from="2"
-                                    to="8"
+                                    from="4"
+                                    to="16"
                                     dur="1.5s"
                                     begin="0s"
                                     repeatCount="indefinite"
@@ -151,36 +159,57 @@ export default function WorldMap({
                                     repeatCount="indefinite"
                                 />
                             </circle>
+                            {/* Blinking cursor label */}
+                            {dot.start.label && (
+                                <text
+                                    x={projectPoint(dot.start.lat, dot.start.lng).x + 5}
+                                    y={projectPoint(dot.start.lat, dot.start.lng).y - 5}
+                                    fontSize="6"
+                                    fill={lineColor}
+                                    fontFamily="monospace"
+                                    className="select-none"
+                                >
+                                    <animate
+                                        attributeName="opacity"
+                                        values="1;0;1"
+                                        dur="1.1s"
+                                        repeatCount="indefinite"
+                                    />
+                                    |
+                                </text>
+                            )}
                         </g>
                         <g
                             key={`end-${i}`}
-                            onMouseEnter={() => handleHover(dot.end)}
-                            onMouseLeave={() => setHoveredDot(null)}
+                            onMouseEnter={() => { handleHover(dot.end); setHoveredDotKey(`end-${i}`); }}
+                            onMouseLeave={() => { setHoveredDot(null); setHoveredDotKey(null); }}
+                            onClick={() => onDotClick && dot.end.imageUrl && onDotClick(dot.end)}
                             className={dot.end.imageUrl ? "cursor-pointer pointer-events-auto" : "pointer-events-auto"}
                         >
                             <circle
                                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                                r={dot.end.imageUrl ? "10" : "2"}
+                                r={dot.end.imageUrl ? "14" : "4"}
                                 fill="transparent"
                             />
                             <circle
                                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                                r="2"
-                                fill={lineColor}
+                                r="4"
+                                fill={hoveredDotKey === `end-${i}` ? DOT_HOVER : DOT_DEFAULT}
+                                style={{ transition: 'fill 0.3s' }}
                             />
                             <circle
                                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
-                                r="2"
-                                fill={lineColor}
+                                r="4"
+                                fill={hoveredDotKey === `end-${i}` ? DOT_HOVER : DOT_DEFAULT}
                                 opacity="0.5"
                             >
                                 <animate
                                     attributeName="r"
-                                    from="2"
-                                    to="8"
+                                    from="4"
+                                    to="16"
                                     dur="1.5s"
                                     begin="0s"
                                     repeatCount="indefinite"
@@ -194,6 +223,25 @@ export default function WorldMap({
                                     repeatCount="indefinite"
                                 />
                             </circle>
+                            {/* Blinking cursor label */}
+                            {dot.end.label && (
+                                <text
+                                    x={projectPoint(dot.end.lat, dot.end.lng).x + 5}
+                                    y={projectPoint(dot.end.lat, dot.end.lng).y - 5}
+                                    fontSize="6"
+                                    fill={lineColor}
+                                    fontFamily="monospace"
+                                    className="select-none"
+                                >
+                                    <animate
+                                        attributeName="opacity"
+                                        values="1;0;1"
+                                        dur="1.1s"
+                                        repeatCount="indefinite"
+                                    />
+                                    |
+                                </text>
+                            )}
                         </g>
                     </g>
                 ))}

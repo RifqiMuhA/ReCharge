@@ -158,7 +158,7 @@ export default function BloomingFlower({ feelings, isDark }: BloomingFlowerProps
             {/* Affirmation Text - Positioned at the bottom mimicking a cinematic subtitle */}
             <div ref={textGroupRef} className="absolute bottom-16 md:bottom-24 w-full flex flex-col items-center text-center gap-6 px-4">
                 <h3 className={`text-3xl md:text-5xl lg:text-6xl font-tt-commons font-light leading-snug max-w-4xl mx-auto drop-shadow-md ${isDark ? "text-floral-white" : "text-pine-teal"}`}>
-                    "Perasaanmu valid. Teruslah bertumbuh seperti taman ini."
+                    &ldquo;Perasaanmu valid. Teruslah bertumbuh seperti taman ini.&rdquo;
                 </h3>
                 <p className={`text-lg md:text-xl font-geometric font-light tracking-wide opacity-70 max-w-2xl mx-auto ${isDark ? "text-floral-white" : "text-pine-teal"}`}>
                     I appreciate you taking the time to pause and reflect today.

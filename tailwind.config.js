@@ -10,7 +10,7 @@ module.exports = {
       colors: {
         'floral-white': '#F5F5ED',
         'blush-pop': '#FFABD2',
-        'pine-teal': '#15221bff',
+        'pine-teal': '#15221b',
         'canary-yellow': '#FFF946',
         'pearl-aqua': '#8DDEDE',
       },
