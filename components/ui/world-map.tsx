@@ -8,11 +8,11 @@ import { useTheme } from "next-themes";
 
 interface MapProps {
     dots?: Array<{
-        start: { lat: number; lng: number; label?: string; imageUrl?: string };
-        end: { lat: number; lng: number; label?: string; imageUrl?: string };
+        start: { lat: number; lng: number; label?: string; imageUrl?: string; description?: string; images?: string[] };
+        end: { lat: number; lng: number; label?: string; imageUrl?: string; description?: string; images?: string[] };
     }>;
     lineColor?: string;
-    onDotClick?: (dot: { lat: number; lng: number; label?: string; imageUrl?: string }) => void;
+    onDotClick?: (dot: { lat: number; lng: number; label?: string; imageUrl?: string; description?: string; images?: string[] }) => void;
 }
 
 export default function WorldMap({
