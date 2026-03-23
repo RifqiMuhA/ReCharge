@@ -90,7 +90,7 @@ export default function Navbar() {
 
                     {/* Left: Home / Logo */}
                     <div className="flex-1 flex justify-start z-50">
-                        <Link href="/" className={`text-xl font-medium font-tt-commons transition-colors hover:text-pearl-aqua ${isMobileMenuOpen ? 'text-white' : 'text-pine-teal'}`}>
+                        <Link href="/" className={`text-xl font-light font-geometric transition-colors hover:text-pearl-aqua ${isMobileMenuOpen ? 'text-white' : 'text-pine-teal'}`}>
                             ReCharge<span className="animate-blink ml-0.5">_</span>
                         </Link>
                     </div>
