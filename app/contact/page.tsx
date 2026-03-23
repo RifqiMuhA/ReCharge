@@ -29,6 +29,76 @@ import { motion } from "motion/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const SOCIAL_CARDS = [
+    {
+        name: "Instagram",
+        handle: "@recharge_id",
+        url: "https://instagram.com",
+        rotation: "-rotate-6",
+        offset: "translate-y-[10%] hover:-translate-y-4 lg:hover:-translate-y-10",
+        bgColor: "bg-blush-pop",
+        icon: (
+            <svg className="w-8 h-8 sm:w-16 sm:h-16 text-pine-teal/80" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+            </svg>
+        )
+    },
+    {
+        name: "X Space",
+        handle: "@recharge_id",
+        url: "https://twitter.com",
+        rotation: "rotate-3",
+        offset: "translate-y-[5%] hover:-translate-y-12 lg:hover:-translate-y-20 md:translate-y-[10%]",
+        bgColor: "bg-pearl-aqua",
+        icon: (
+            <svg className="w-8 h-8 sm:w-16 sm:h-16 text-pine-teal/80" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.961h-1.91z" />
+            </svg>
+        )
+    },
+    {
+        name: "YouTube",
+        handle: "ReCharge Indonesia",
+        url: "https://youtube.com",
+        rotation: "-rotate-2",
+        offset: "translate-y-[5%] hover:-translate-y-6 lg:hover:-translate-y-12",
+        bgColor: "bg-blush-pop",
+        icon: (
+            <svg className="w-8 h-8 sm:w-16 sm:h-16 text-pine-teal/80" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+            </svg>
+        )
+    },
+    {
+        name: "TikTok",
+        handle: "@recharge_id",
+        url: "https://tiktok.com",
+        rotation: "rotate-6",
+        offset: "translate-y-[15%] hover:-translate-y-2 lg:hover:-translate-y-8 md:translate-y-[20%]",
+        bgColor: "bg-pearl-aqua",
+        icon: (
+            <svg className="w-8 h-8 sm:w-16 sm:h-16 text-pine-teal/80" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.12-3.44-3.17-3.61-5.46-.02-.24-.02-.48-.02-.72.01-1.14.28-2.29.83-3.31 1.15-2.07 3.32-3.51 5.67-3.8 0 1.34.01 2.68.01 4.02-.69.06-1.35.32-1.87.82-.69.65-1.02 1.64-.81 2.58.21.92.83 1.72 1.69 2.11 1.05.47 2.34.39 3.29-.27.87-.58 1.4-1.57 1.44-2.61.03-3.08.01-6.16.02-9.24.01-3.67.01-7.34.02-11.01h3.94z"/>
+            </svg>
+        )
+    },
+    {
+        name: "WhatsApp",
+        handle: "ReCharge Support",
+        url: "https://wa.me/628123456789",
+        rotation: "-rotate-4",
+        offset: "translate-y-[20%] hover:-translate-y-4 lg:hover:-translate-y-8",
+        bgColor: "bg-blush-pop",
+        icon: (
+            <svg className="w-8 h-8 sm:w-16 sm:h-16 text-pine-teal/80" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652c1.746.943 3.71 1.444 5.71 1.447h.006c6.585 0 11.946-5.336 11.949-11.896 0-3.176-1.24-6.165-3.48-8.45zm-8.475 18.068h-.005c-1.774 0-3.515-.471-5.04-1.365l-.361-.212-3.746.975.998-3.633-.234-.37A9.851 9.851 0 0 1 2.158 11.9c.002-5.448 4.453-9.888 9.932-9.888 2.651.001 5.143 1.026 7.014 2.887 1.87 1.861 2.903 4.336 2.902 6.965C22.004 17.3 17.55 21.737 12.045 21.517zM17.48 14.155c-.297-.148-1.758-.863-2.03-.96-.272-.099-.47-.148-.668.148-.198.297-.768.96-.94 1.158-.173.198-.346.222-.644.074-1.463-.733-2.582-1.458-3.606-2.901-.264-.37.311-.34.887-.938.099-.099.198-.222.247-.37.049-.148.025-.272-.025-.37-.049-.099-.668-1.595-.916-2.18-.241-.571-.486-.494-.668-.501-.173-.007-.371-.008-.57-.008s-.52.074-.792.37c-.272.297-1.04 1.006-1.04 2.455 0 1.449 1.064 2.85 1.213 3.048.148.198 2.055 3.197 4.976 4.409.697.29 1.24.464 1.666.594.698.22 1.332.189 1.834.114.562-.083 1.728-.698 1.975-1.378.247-.68.247-1.261.173-1.378-.074-.117-.272-.185-.569-.333z"/>
+            </svg>
+        )
+    }
+];
+
 export default function ContactPage() {
     const [formData, setFormData] = useState({
         name: "",
@@ -513,7 +583,7 @@ export default function ContactPage() {
                         {/* The Cover that slides up and drops behind */}
                         <div
                             ref={coverRef}
-                            className="absolute inset-y-0 left-2 right-2 sm:left-4 sm:right-4 lg:left-8 lg:right-8 bg-[#F5F5ED] shadow-2xl rounded-sm border border-pine-teal/60 z-50 flex flex-col md:flex-row items-center justify-center pointer-events-none overflow-hidden gap-6 px-10"
+                            className="absolute inset-y-0 left-2 right-2 sm:left-4 sm:right-4 lg:left-8 lg:right-8 bg-[#F5F5ED] shadow-2xl rounded-sm border border-pine-teal/20 z-50 flex flex-col md:flex-row items-center justify-center pointer-events-none overflow-hidden gap-6 px-10"
                         >
                             {/* Inner tint */}
                             <div className="absolute inset-0 bg-pine-teal/[0.03]"></div>
@@ -539,7 +609,7 @@ export default function ContactPage() {
                         {/* Main Paper Content */}
                         <div
                             ref={mainPaperRef}
-                            className="bg-[#FAF9F6] shadow-[0_10px_30px_rgba(0,0,0,0.06)] rounded-sm border border-pine-teal/70 relative transform-style-3d"
+                            className="bg-[#FAF9F6] shadow-[0_10px_30px_rgba(0,0,0,0.06)] rounded-sm border border-pine-teal/30 relative transform-style-3d"
                         >
                             {/* Lines wrap inside so they don't break outside the rounded corners */}
                             <div className="absolute inset-0 overflow-hidden rounded-sm pointer-events-none z-0">
@@ -989,6 +1059,51 @@ export default function ContactPage() {
                             ]}
                         />
                     </div>
+                </div>
+
+                {/* Spacer to push content down and not overlap with map */}
+                <div className="h-16 md:h-24 w-full"></div>
+
+                {/* Hubungi Kami Section before Polaroids */}
+                <div className="w-full flex flex-col items-center justify-center pointer-events-none z-10 px-4 mb-16 md:mb-24">
+                    <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-geometric font-bold text-pine-teal mb-2 sm:mb-4 tracking-tight leading-none text-center">
+                        Hubungi <span className="italic font-light">Kami</span>
+                    </h2>
+                    <div className="flex flex-col items-center gap-1 sm:gap-2">
+                        <div className="bg-blush-pop text-pine-teal px-4 py-1 sm:px-6 sm:py-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-geometric tracking-wide transform -rotate-1 whitespace-nowrap shadow-md">
+                            Looking Forward to
+                        </div>
+                        <div className="bg-pine-teal text-floral-white px-4 py-1 sm:px-6 sm:py-2 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-geometric tracking-wide transform ml-4 md:ml-8 rotate-1 whitespace-nowrap shadow-md">
+                            Connect with You!
+                        </div>
+                    </div>
+                </div>
+
+                {/* Social Media Polaroids - Hiding at the bottom edge */}
+                <div className="absolute -bottom-16 sm:-bottom-24 md:-bottom-32 left-0 w-full flex items-end justify-center z-0 pointer-events-none -space-x-6 sm:-space-x-12 md:-space-x-16 lg:-space-x-24">
+                    {SOCIAL_CARDS.map((card, idx) => (
+                        <a
+                            key={idx}
+                            href={card.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`block relative transition-all duration-500 hover:z-50 pointer-events-auto ${card.rotation} ${card.offset} cursor-pointer hover:scale-105`}
+                            style={{ zIndex: SOCIAL_CARDS.length - idx }}
+                        >
+                            <div className={`${card.bgColor} p-2 sm:p-3 md:p-4 pb-10 sm:pb-12 md:pb-16 lg:pb-20 shadow-[0_-10px_30px_rgba(0,0,0,0.1)] rounded-sm border border-pine-teal/5 w-32 sm:w-44 md:w-60 lg:w-72 group`}>
+                                <div className="relative w-full aspect-square bg-pine-teal/5 overflow-hidden flex items-center justify-center">
+                                    <div className="absolute inset-0 flex items-center justify-center bg-[#FAF9F6] transition-colors z-10">
+                                        {card.icon}
+                                    </div>
+                                </div>
+                                <div className="absolute bottom-2 sm:bottom-3 md:bottom-5 lg:bottom-6 left-0 w-full text-center px-1">
+                                    <span className="font-tt-commons text-[10px] sm:text-sm md:text-base tracking-wide text-pine-teal/80 group-hover:text-pine-teal transition-colors truncate block">
+                                        {card.handle}
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    ))}
                 </div>
             </div>
 

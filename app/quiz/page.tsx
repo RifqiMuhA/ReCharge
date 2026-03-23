@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import BreathingPhase from '@/components/quiz/BreathingPhase';
 import GardenInput from '@/components/quiz/GardenInput';
 import BloomingFlower from '@/components/quiz/BloomingFlower';
@@ -11,35 +12,8 @@ type Phase = 'breathing' | 'input' | 'reveal';
 export default function QuizPage() {
     const [phase, setPhase] = useState<Phase>('breathing');
     const [feelings, setFeelings] = useState<string[]>(['', '', '']);
-    const [timeOfDay, setTimeOfDay] = useState<'morning' | 'sunset' | 'night'>('morning');
-
-    useEffect(() => {
-        // Determine time of day for dynamic background
-        const hour = new Date().getHours();
-        if (hour >= 6 && hour < 16) {
-            setTimeOfDay('morning');
-        } else if (hour >= 16 && hour < 19) {
-            setTimeOfDay('sunset');
-        } else {
-            setTimeOfDay('night');
-        }
-    }, []);
-
-    const getBgClass = () => {
-        switch (timeOfDay) {
-            case 'morning':
-                return 'bg-gradient-to-br from-floral-white via-floral-white to-pearl-aqua/30 text-pine-teal';
-            case 'sunset':
-                return 'bg-gradient-to-br from-[#FFD1A9] via-[#FFABD2] to-[#B39CD0] text-pine-teal';
-            case 'night':
-                return 'bg-gradient-to-br from-[#0A1128] via-[#12224A] to-pine-teal text-floral-white';
-            default:
-                return 'bg-floral-white text-pine-teal';
-        }
-    };
 
     const handleBreathingComplete = () => {
-        // Simple seamless transition to input phase
         setPhase('input');
     };
 
@@ -49,26 +23,58 @@ export default function QuizPage() {
     };
 
     return (
-        <div className={`fixed inset-0 w-full h-full flex flex-col transition-colors duration-[3000ms] overflow-hidden ${getBgClass()}`}>
+        <div className={`fixed inset-0 w-full h-full flex flex-col font-body transition-colors duration-[2000ms] overflow-hidden ${phase === 'reveal' ? 'bg-black text-floral-white' : 'bg-canary-yellow text-pine-teal'}`}>
 
-            {/* Dynamic mesh gradient overlay */}
-            <div className="absolute inset-0 opacity-40 mix-blend-multiply pointer-events-none" style={{
-                background: 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.1) 100%)'
+            {/* Botanical Background (Reveal Only) */}
+            <AnimatePresence>
+                {phase === 'reveal' && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 2.5 }}
+                        className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat"
+                        style={{
+                            backgroundImage: "url('https://images.unsplash.com/photo-1490750967868-8f52a4128f11?q=80&w=2000&auto=format&fit=crop')"
+                        }}
+                    >
+                        <div className="absolute inset-0 bg-[#15221b]/70 backdrop-blur-md z-0"></div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Subtle Gradient Overlays */}
+            <AnimatePresence>
+                {phase !== 'reveal' && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 z-0 pointer-events-none opacity-50 mix-blend-overlay"
+                        style={{
+                            background: 'radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.8) 0%, rgba(255, 249, 70, 0) 80%)'
+                        }}
+                    ></motion.div>
+                )}
+            </AnimatePresence>
+
+            {/* Dynamic mesh gradient overlay for aesthetic tinting */}
+            <div className="absolute inset-0 opacity-20 mix-blend-multiply pointer-events-none z-0" style={{
+                background: 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0) 0%, rgba(0, 0, 0, 0.2) 100%)'
             }}></div>
 
-            <AudioVisualizer isDark={timeOfDay === 'night'} />
+            <AudioVisualizer isDark={phase === 'reveal'} />
 
             <div className="flex-grow flex items-center justify-center relative z-10 w-full px-4">
                 {phase === 'breathing' && (
-                    <BreathingPhase onComplete={handleBreathingComplete} isDark={timeOfDay === 'night'} />
+                    <BreathingPhase onComplete={handleBreathingComplete} isDark={false} />
                 )}
 
                 {phase === 'input' && (
-                    <GardenInput onComplete={handleInputComplete} isDark={timeOfDay === 'night'} />
+                    <GardenInput onComplete={handleInputComplete} isDark={false} />
                 )}
 
                 {phase === 'reveal' && (
-                    <BloomingFlower feelings={feelings} isDark={timeOfDay === 'night'} />
+                    <BloomingFlower feelings={feelings} isDark={true} />
                 )}
             </div>
         </div>
