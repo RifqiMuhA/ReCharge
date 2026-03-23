@@ -1,0 +1,39 @@
+<svg viewBox="0 0 1000 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minimalist Hand-Drawn Office Desk Scene -->
+  <!-- Horizontal Horizon Line (Desk Edge) -->
+  <path d="M 0 500 L 1000 500" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 0 520 L 1000 520" stroke="#1A1A1A" stroke-width="2"/>
+
+  <!-- Coffee Mug (Left) -->
+  <path d="M 150 480 C 140 500, 160 500, 190 500 C 220 500, 240 500, 230 480 L 220 400 L 160 400 Z" fill="#F2F2F2" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Mug Handle -->
+  <path d="M 225 420 C 260 420, 260 460, 228 460" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+  <!-- Steam -->
+  <path d="M 180 380 Q 170 350 190 320" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+  <path d="M 200 370 Q 210 330 190 300" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Giant Monitor (Center) -->
+  <path d="M 300 480 L 300 200 Q 300 180 320 180 L 680 180 Q 700 180 700 200 L 700 480 Z" fill="#F2F2F2" stroke="#1A1A1A" stroke-width="6" stroke-linejoin="round"/>
+  <!-- Monitor Inner Screen -->
+  <rect x="320" y="200" width="360" height="260" stroke="#1A1A1A" stroke-width="4"/>
+  <!-- Mock code/ui lines inside monitor -->
+  <line x1="340" y1="230" x2="450" y2="230" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="340" y1="260" x2="550" y2="260" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="340" y1="290" x2="480" y2="290" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+  <line x1="360" y1="320" x2="600" y2="320" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+  <!-- Monitor Stand -->
+  <path d="M 450 480 L 450 500 L 550 500 L 550 480" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- Headphones on desk (Right) -->
+  <path d="M 750 490 C 730 400, 850 400, 830 490" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round"/>
+  <rect x="735" y="450" width="20" height="50" rx="5" stroke="#1A1A1A" stroke-width="4" fill="#F2F2F2"/>
+  <rect x="825" y="450" width="20" height="50" rx="5" stroke="#1A1A1A" stroke-width="4" fill="#F2F2F2"/>
+
+  <!-- Floating Sticky Notes -->
+  <path d="M 620 420 L 660 410 L 670 450 L 630 460 Z" fill="#F2F2F2" stroke="#1A1A1A" stroke-width="3" stroke-linejoin="round"/>
+  <!-- "m" icon for email -->
+  <path d="M 635 440 L 640 435 L 650 445 L 660 430" stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round" fill="none"/>
+
+  <!-- Crumpled paper -->
+  <path d="M 850 495 C 840 470, 870 460, 880 480 C 890 500, 860 510, 850 495 Z" stroke="#1A1A1A" stroke-width="3" fill="none"/>
+</svg>

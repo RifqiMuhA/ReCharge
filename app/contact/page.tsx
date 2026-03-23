@@ -1,3 +1,6 @@
+'use client';
+import React from 'react';
+
 export default function Contact() {
     return (
         <div className="max-w-3xl mx-auto px-4 py-16 sm:px-6 lg:px-8">

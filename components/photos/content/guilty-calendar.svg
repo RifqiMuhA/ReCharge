@@ -1,0 +1,30 @@
+<svg viewBox="0 0 600 800" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minimalist Hand-Drawn Calendar Sheet -->
+  
+  <!-- Main Paper Body -->
+  <path d="M 50 100 Q 300 120 550 90 L 530 750 Q 300 730 60 760 Z" fill="#F2F2F2" stroke="#1A1A1A" stroke-width="6" stroke-linejoin="round"/>
+  
+  <!-- Paper creases/texture -->
+  <path d="M 100 200 Q 200 190 300 210" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  <path d="M 450 600 Q 500 590 520 620" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>
+  
+  <!-- Spiral Wire Bindings -->
+  <g stroke="#1A1A1A" stroke-width="6" stroke-linecap="round" fill="none">
+    <path d="M 80 80 C 70 50, 100 30, 110 60 C 120 90, 90 110, 80 80 Z"/>
+    <path d="M 160 85 C 150 55, 180 35, 190 65 C 200 95, 170 115, 160 85 Z"/>
+    <path d="M 240 88 C 230 58, 260 38, 270 68 C 280 98, 250 118, 240 88 Z"/>
+    <path d="M 320 92 C 310 62, 340 42, 350 72 C 360 102, 330 122, 320 92 Z"/>
+    <path d="M 400 90 C 390 60, 420 40, 430 70 C 440 100, 410 120, 400 90 Z"/>
+    <path d="M 480 85 C 470 55, 500 35, 510 65 C 520 95, 490 115, 480 85 Z"/>
+  </g>
+  
+  <!-- Month Text "JUNE" -->
+  <text x="300" y="350" font-family="sans-serif" font-weight="900" font-size="120" fill="#1A1A1A" text-anchor="middle" transform="rotate(3 300 350)">JUNE</text>
+  
+  <!-- Date Text "29" -->
+  <text x="300" y="600" font-family="sans-serif" font-weight="900" font-size="280" fill="#1A1A1A" text-anchor="middle" transform="rotate(-2 300 600)">29</text>
+
+  <!-- Decorative squiggles -->
+  <path d="M 150 650 Q 200 680 250 640" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M 400 250 Q 420 220 450 260" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" fill="none"/>
+</svg>

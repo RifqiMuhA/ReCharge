@@ -1,0 +1,46 @@
+<svg viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minimalist Character Illustration: Designer and Developer Outline -->
+  <!-- Background Circle (Sun/Moon) -->
+  <circle cx="400" cy="300" r="220" stroke="#1A1A1A" stroke-width="2"/>
+  
+  <!-- Developer Character (Right) -->
+  <g id="developer">
+    <!-- Tall thin body -->
+    <path d="M480 300 C 490 200, 520 150, 560 100 C 580 80, 590 100, 550 200 C 530 250, 520 300, 510 400" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+    <path d="M480 300 C 460 380, 480 450, 550 500" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+    <!-- Wild Hair -->
+    <path d="M470 200 C 440 180, 450 140, 480 150 C 490 130, 520 120, 520 160 C 540 150, 560 170, 540 200 C 560 220, 550 250, 520 240 Z" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round"/>
+    <!-- Face / Eyes -->
+    <ellipse cx="490" cy="220" rx="6" ry="12" stroke="#1A1A1A" stroke-width="4" fill="#F2F2F2"/>
+    <ellipse cx="510" cy="220" rx="6" ry="12" stroke="#1A1A1A" stroke-width="4" fill="#F2F2F2"/>
+    <circle cx="490" cy="220" r="2" fill="#1A1A1A"/>
+    <circle cx="510" cy="220" r="2" fill="#1A1A1A"/>
+    <path d="M495 240 C 500 260, 505 260, 510 240 Z" stroke="#1A1A1A" stroke-width="4" fill="#1A1A1A"/>
+    <!-- Hand -->
+    <path d="M560 480 C 600 480, 620 500, 640 540" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+    <path d="M620 500 L 650 510 M 630 520 L 660 530" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+    <!-- Arm texture hairs (as in original) -->
+    <path d="M530 180 L 540 170 M 550 140 L 560 130 M 560 210 L 570 200 M 540 320 L 520 310" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Designer Character (Left) -->
+  <g id="designer">
+    <!-- Big puffy sweater / arms crossed -->
+    <path d="M280 400 C 220 420, 200 350, 240 300 C 280 250, 350 250, 380 300 C 450 260, 480 300, 450 380 C 420 450, 380 480, 320 450 Z" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round" fill="#F2F2F2"/>
+    <path d="M240 300 C 300 280, 350 320, 380 300 C 350 350, 320 380, 280 400" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+    <!-- Head / Headphones -->
+    <path d="M380 280 C 370 200, 430 150, 450 230 C 460 270, 420 290, 380 280 Z" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round" fill="#F2F2F2"/>
+    <rect x="420" y="160" width="30" height="40" rx="8" transform="rotate(15 420 160)" stroke="#1A1A1A" stroke-width="4"/>
+    <path d="M430 160 C 400 140, 370 170, 380 190" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+    <!-- Face -->
+    <path d="M370 230 L 350 240 L 380 250" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+    <path d="M390 220 C 410 240, 420 230, 410 210 Z" stroke="#1A1A1A" stroke-width="4" fill="#1A1A1A"/>
+    <circle cx="390" cy="200" r="3" fill="#1A1A1A"/>
+    <!-- Fluff/Seam marks on sweater -->
+    <path d="M250 320 L 260 310 M 260 380 L 270 370 M 340 340 L 350 330 M 410 380 L 420 370 M 440 280 L 450 290 M 360 260 L 370 260" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- Laptop on floor -->
+  <path d="M400 500 L 460 500 L 440 450 L 380 450 Z" stroke="#1A1A1A" stroke-width="3" fill="#F2F2F2"/>
+  <path d="M380 450 L 350 400 L 410 400 L 440 450 Z" stroke="#1A1A1A" stroke-width="3" fill="#F2F2F2"/>
+</svg>
