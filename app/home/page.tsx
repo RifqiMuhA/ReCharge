@@ -1,5 +1,4 @@
 import HeroSection from './_sections/HeroSection';
-import FamiliarSection from './_sections/FamiliarSection';
 import MirrorSection from './_sections/MirrorSection';
 import DiagnosisSection from './_sections/DiagnosisSection';
 import CtaSection from './_sections/CtaSection';
@@ -14,7 +13,6 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
-      {/* <FamiliarSection /> */}
       <MirrorSection />
       <DiagnosisSection />
       <CtaSection />

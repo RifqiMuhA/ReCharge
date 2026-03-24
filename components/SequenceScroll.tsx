@@ -2,6 +2,8 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import TextType from '@/components/ui/text-type';
+import Noise from '@/components/ui/noise';
 
 const FRAME_COUNT = 192;
 /*
@@ -72,20 +74,27 @@ const sizeClasses: Record<string, string> = {
 };
 
 function Bubble({ bubble, scrollYProgress }: { bubble: BubbleConfig; scrollYProgress: any }) {
-  const enterOffset = { left: -120, right: 120, top: -80, bottom: 80 };
-  const dir = bubble.enterFrom;
-  const offsetX = dir === 'left' ? enterOffset.left : dir === 'right' ? enterOffset.right : 0;
-  const offsetY = dir === 'top' ? enterOffset.top : dir === 'bottom' ? enterOffset.bottom : 0;
+  // Center is roughly 50, 50. Calculate offset vectors pointing FROM the center to the bubble
+  const tx = parseFloat(bubble.left);
+  const ty = parseFloat(bubble.top);
+
+  // Start the bubble closer to the center, then expand to its original absolute position
+  const dx = tx - 50;
+  const dy = ty - 50;
+
+  // If dx is positive (right side), start more left (negative x).
+  const offsetX = -dx * 4;
+  const offsetY = -dy * 4;
 
   const fadeStart = bubble.appearAt;
-  const fadeIn = fadeStart + 0.03;
+  const fadeIn = fadeStart + 0.1;
   const fadeOutStart = 0.92;
   const fadeOutEnd = 0.98;
 
   const opacity = useTransform(scrollYProgress, [fadeStart, fadeIn, fadeOutStart, fadeOutEnd], [0, 1, 1, 0]);
   const x = useTransform(scrollYProgress, [fadeStart, fadeIn], [offsetX, 0]);
   const y = useTransform(scrollYProgress, [fadeStart, fadeIn], [offsetY, 0]);
-  const scale = useTransform(scrollYProgress, [fadeStart, fadeIn], [0.5, 1]);
+  const scale = useTransform(scrollYProgress, [fadeStart, fadeIn], [0.1, 1]);
 
   return (
     <motion.div
@@ -102,11 +111,7 @@ function Bubble({ bubble, scrollYProgress }: { bubble: BubbleConfig; scrollYProg
       className="pointer-events-none z-20"
     >
       <div
-        className={`${sizeClasses[bubble.size]} bg-floral-white/80 backdrop-blur-md text-pine-teal/90 font-tt-commons font-bold tracking-wide whitespace-nowrap shadow-sm`}
-        style={{
-          border: '1.5px solid rgba(21,34,27,0.2)',
-          borderRadius: '20px',
-        }}
+        className={`${sizeClasses[bubble.size]} text-[#15221bff] font-tt-commons font-bold tracking-wide whitespace-nowrap`}
       >
         {bubble.text}
       </div>
@@ -288,6 +293,16 @@ export default function SequenceScroll() {
           />
         </div>
 
+        <div className="absolute inset-0 pointer-events-none z-10 opacity-60">
+          <Noise
+            patternSize={250}
+            patternScaleX={1.5}
+            patternScaleY={1.5}
+            patternRefreshInterval={2}
+            patternAlpha={40}
+          />
+        </div>
+
         <canvas
           ref={canvasRef}
           className="absolute inset-0 w-full h-full pointer-events-none z-10 mix-blend-multiply"
@@ -308,9 +323,20 @@ export default function SequenceScroll() {
             style={{ opacity: opacity35, y: y35 }}
             className="absolute inset-0 flex flex-col items-start justify-center pl-[5%] md:pl-[10%]"
           >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-tt-commons font-bold text-pine-teal tracking-tight drop-shadow-md">
-              It starts with<br />just one scroll.
-            </h2>
+            {/* @ts-ignore */}
+            <TextType
+              as="h2"
+              className="text-4xl md:text-5xl lg:text-7xl font-tt-commons font-bold text-pine-teal tracking-tight drop-shadow-md"
+              text={["dimulai dari\nsatu notifikasi."]}
+              textColors={["#15221b"]}
+              typingSpeed={70}
+              loop={false}
+              deletingSpeed={40}
+              pauseDuration={2000}
+              showCursor={true}
+              cursorCharacter="|"
+              cursorClassName="text-canary-yellow"
+            />
           </motion.div>
 
         </div>
