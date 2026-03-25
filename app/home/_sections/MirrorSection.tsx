@@ -6,6 +6,7 @@ import Image from 'next/image';
 import scrollHpImg from '@/components/photos/home/scroll-hp.png';
 import alarmImg from '@/components/photos/home/alarm.png';
 import sleepImg from '@/components/photos/home/sleep.png';
+import pialaImg from '@/components/photos/home/piala.png';
 
 /* ──────────────────────────────────────────────
    Phase 1 Data: Scroll Reveal Kalimat
@@ -145,6 +146,31 @@ export default function MirrorSection() {
                   <Image
                     src={sleepImg}
                     alt="Decorative Sleep"
+                    className="w-full h-auto object-contain drop-shadow-xl opacity-90"
+                  />
+                </motion.div>
+              </div>
+            )}
+            {i === 6 && (
+              <div
+                className="absolute right-[-5%] sm:right-[0%] md:right-[15%] lg:right-[-13%] top-[37%] md:top-[27%] -translate-y-1/2 z-0 pointer-events-none
+                           w-[140px] sm:w-[180px] md:w-[180px] lg:w-[200px]"
+                style={{ transform: 'rotate(2deg)' }}
+                aria-hidden="true"
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{
+                    opacity: { duration: 0.8 },
+                    y: { duration: 4.8, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                >
+                  <Image
+                    src={pialaImg}
+                    alt="Decorative Trophy"
                     className="w-full h-auto object-contain drop-shadow-xl opacity-90"
                   />
                 </motion.div>

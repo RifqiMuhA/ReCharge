@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ScrollStack, { ScrollStackItem } from '@/components/ui/scroll-stack';
+import { Highlight } from '@/components/ui/hero-highlight';
 
 /* ──────────────────────────────────────────────
    Icons for Dimension Cards
@@ -165,24 +166,24 @@ export default function DiagnosisSection() {
 
   return (
     <section className="relative min-h-screen py-24 md:py-32 overflow-hidden grain-overlay" style={{ background: '#F5F5ED', WebkitOverflowScrolling: 'touch' }}>
-      
+
       {/* Background soft styling */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden flex flex-col justify-between">
-         <div className="w-[120%] h-[300px] bg-gradient-to-b from-white/40 to-transparent -ml-[10%]" />
+        <div className="w-[120%] h-[300px] bg-gradient-to-b from-white/40 to-transparent -ml-[10%]" />
       </div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
-        
+
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="mb-16 md:mb-20 text-center flex flex-col items-center"
+          className="mb-0 text-center flex flex-col items-center"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-tt-commons font-bold text-pine-teal leading-tight lowercase mb-4">
-            memahami burnout
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-geometric font-bold text-pine-teal leading-tight mb-4">
+            Memahami <Highlight className="italic">Burnout</Highlight>
           </h2>
           <p className="text-pine-teal/50 font-geometric text-base md:text-lg lowercase max-w-xl text-center">
             lima dimensi burnout yang perlu kamu kenali, dijelaskan dengan sederhana.
@@ -190,9 +191,9 @@ export default function DiagnosisSection() {
         </motion.div>
 
         {/* Scroll Stack Layout */}
-        <div className="mt-10 md:mt-16 w-full max-w-4xl mx-auto" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
-          <ScrollStack 
-            useWindowScroll={true} 
+        <div className="-mt-12 md:-mt-24 w-full max-w-4xl mx-auto" style={{ willChange: 'transform', transform: 'translateZ(0)' }}>
+          <ScrollStack
+            useWindowScroll={true}
             itemDistance={100}
             itemScale={0.03}
             itemStackDistance={30}
@@ -217,7 +218,7 @@ export default function DiagnosisSection() {
             ))}
           </ScrollStack>
         </div>
-        
+
       </div>
     </section>
   );
