@@ -10,13 +10,18 @@ module.exports = {
       colors: {
         'floral-white': '#F5F5ED',
         'blush-pop': '#FFABD2',
-        'pine-teal': '#15221bff',
+        'pine-teal': '#15221b',
         'canary-yellow': '#FFF946',
         'pearl-aqua': '#8DDEDE',
+        background: 'hsl(var(--background))',
+        foreground: 'hsl(var(--foreground))',
       },
       fontFamily: {
         'tt-commons': ['TT Commons', 'Helvetica', 'sans-serif'],
+        'tt-commons-light': ['TTCommonsLight', 'Helvetica', 'sans-serif'],
         'geometric': ['Geometric415Lite', 'Helvetica', 'sans-serif'],
+        heading: ["'Instrument Serif'", "serif"],
+        body: ["'Barlow'", "sans-serif"],
       },
       keyframes: {
         blink: {

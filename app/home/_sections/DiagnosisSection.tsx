@@ -62,8 +62,8 @@ function DimensionCard({
   Icon,
 }: {
   num: string;
-  title: string;
-  description: string;
+  title: React.ReactNode;
+  description: React.ReactNode;
   quote: string;
   source: string;
   colorStr: string;
@@ -119,8 +119,8 @@ export default function DiagnosisSection() {
   const dimensions = [
     {
       num: '01',
-      title: 'kelelahan yang tidak hilang meski sudah istirahat',
-      description: 'Kamu tidur cukup, tapi bangun tetap merasa lelah. Bukan karena kurang istirahat — melainkan karena energimu sudah terkuras jauh sebelum hari dimulai. Ini bukan kelemahan. Ini adalah sinyal.',
+      title: <>Kelelahan yang tidak hilang meski <Highlight className="italic text-white">sudah istirahat</Highlight></>,
+      description: <>Kamu tidur cukup, tapi bangun tetap merasa lelah. Bukan karena kurang istirahat — melainkan karena energimu sudah <Highlight className="italic text-white">terkuras</Highlight> jauh sebelum hari dimulai. Ini bukan kelemahan. Ini adalah sinyal.</>,
       quote: 'Burnout is not a problem to be solved, it is a response to be understood — a signal that something in the environment needs to change.',
       source: 'Christina Maslach, Ph.D., UC Berkeley · Maslach Burnout Inventory',
       colorStr: 'rgba(255,171,210,0.25)', // blush-pop
@@ -128,8 +128,8 @@ export default function DiagnosisSection() {
     },
     {
       num: '02',
-      title: 'mati rasa, bukan sedih',
-      description: 'Kamu tidak menangis. Kamu tidak marah. Kamu hanya tidak merasakan apa-apa. Scrolling, liking, closing — semua terasa seperti gerak otomatis tanpa makna.',
+      title: <>Mati rasa, bukan <Highlight className="italic text-white">sedih</Highlight></>,
+      description: <>Kamu tidak menangis. Kamu tidak marah. Kamu hanya <Highlight className="italic text-white">tidak merasakan apa-apa</Highlight>. Scrolling, liking, closing — semua terasa seperti gerak otomatis tanpa makna.</>,
       quote: 'Cynicism is the mind\'s way of protecting itself from further disappointment. It is exhaustion wearing a mask of indifference.',
       source: 'Christina Maslach, Ph.D. · "Burnout: The Cost of Caring"',
       colorStr: 'rgba(141,222,222,0.25)', // pearl-aqua
@@ -137,8 +137,8 @@ export default function DiagnosisSection() {
     },
     {
       num: '03',
-      title: 'guilty saat istirahat',
-      description: 'Satu jam tidak melakukan apa-apa terasa seperti pemborosan. Padahal tubuhmu sudah meminta berhenti sejak lama — kamu yang memilih untuk mengabaikannya, karena berhenti terasa seperti kekalahan.',
+      title: <><Highlight className="italic text-white">Guilty</Highlight> saat istirahat</>,
+      description: <>Satu jam tidak melakukan apa-apa terasa seperti pemborosan. Padahal tubuhmu sudah meminta berhenti sejak lama — kamu yang memilih untuk <Highlight className="italic text-white">mengabaikannya</Highlight>, karena berhenti terasa seperti kekalahan.</>,
       quote: 'Our devices make it nearly impossible to disconnect, and that constant connectivity is taking a real toll on mental health.',
       source: 'Sharon Claffey, Ph.D., Psikolog Klinis',
       colorStr: 'rgba(255,249,70,0.25)', // canary-yellow
@@ -146,8 +146,8 @@ export default function DiagnosisSection() {
     },
     {
       num: '04',
-      title: 'mengukur hidup dengan standar orang lain',
-      description: 'Setiap kali membuka feed, kamu melihat seseorang yang tampak lebih produktif, lebih bahagia, lebih cukup. Tanpa sadar, kamu mulai mengejar standar yang bahkan bukan milikmu.',
+      title: <>Mengukur hidup dengan <Highlight className="italic text-white">standar orang lain</Highlight></>,
+      description: <>Setiap kali membuka feed, kamu melihat seseorang yang tampak lebih produktif, lebih bahagia, lebih cukup. Tanpa sadar, kamu mulai <Highlight className="italic text-white">mengejar standar</Highlight> yang bahkan bukan milikmu.</>,
       quote: 'Social media enables effortless upward comparison — we see curated highlights and measure ourselves against an impossible standard.',
       source: 'Sharon Claffey, Ph.D., Psikolog Klinis',
       colorStr: 'rgba(255,171,210,0.25)', // blush-pop
@@ -155,8 +155,8 @@ export default function DiagnosisSection() {
     },
     {
       num: '05',
-      title: 'pencapaian yang terasa hampa',
-      description: 'Kamu berhasil. Kamu seharusnya bangga. Tapi yang ada hanya satu pertanyaan: sudah cukupkah ini? Dan jawaban yang muncul, hampir selalu — belum.',
+      title: <>Pencapaian yang terasa <Highlight className="italic text-white">hampa</Highlight></>,
+      description: <>Kamu berhasil. Kamu seharusnya bangga. Tapi yang ada hanya satu pertanyaan: <Highlight className="italic text-white">sudah cukupkah ini?</Highlight> Dan jawaban yang muncul, hampir selalu — belum.</>,
       quote: 'Reduced personal accomplishment is not about failing — it is about succeeding and still feeling like it is never enough.',
       source: 'Christina Maslach, Ph.D. · Maslach Burnout Inventory, Dimensi Ketiga',
       colorStr: 'rgba(141,222,222,0.25)', // pearl-aqua
