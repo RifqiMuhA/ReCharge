@@ -53,12 +53,21 @@ function TypingText({
 
   React.useEffect(() => {
     if (isInView) {
+      // Reset state first so animation can re-run
+      setDisplayedText('');
+      setStarted(false);
       const timeoutId = setTimeout(() => {
         setStarted(true);
       }, delay);
       return () => clearTimeout(timeoutId);
+    } else {
+      // Out of view: clear text so next entry starts fresh
+      if (!inViewOnce) {
+        setStarted(false);
+        setDisplayedText('');
+      }
     }
-  }, [isInView, delay]);
+  }, [isInView, delay, inViewOnce]);
 
   React.useEffect(() => {
     if (!started) return;

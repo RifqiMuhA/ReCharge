@@ -18,7 +18,7 @@ export default function ImageMouseTrail({
   distance = 25,
   fadeAnimation = false,
 }: ImageMouseTrailProps) {
-  const renderCount = Math.max(items.length, maxNumberOfImages, 40);
+  const renderCount = Math.max(items.length, 100); // 100 items to prevent teleporting on fast drags
   const renderedItems = Array.from({ length: renderCount }).map(
     (_, index) => items[index % items.length]
   );
@@ -48,7 +48,7 @@ export default function ImageMouseTrail({
     }
     const timeout = setTimeout(() => {
       image.dataset.status = 'inactive';
-    }, 1000);
+    }, 1500); // Extended trail duration to 1.5s
     image.dataset.timeoutId = timeout.toString();
 
     last.current = { x, y };
@@ -74,14 +74,7 @@ export default function ImageMouseTrail({
 
     if (distanceFromLast(clientX, clientY) > distance) {
       const lead = refs.current[globalIndex.current % renderedItems.length];
-
-      let tailIndex = (globalIndex.current - maxNumberOfImages) % renderedItems.length;
-      if (tailIndex < 0) tailIndex += renderedItems.length;
-      const tail = refs.current[tailIndex];
-
       if (lead) activate(lead, clientX, clientY);
-      if (tail && globalIndex.current >= maxNumberOfImages) deactivate(tail);
-
       globalIndex.current++;
     }
   };

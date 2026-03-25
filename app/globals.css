@@ -86,6 +86,6 @@
     border-color: var(--border);
   }
   html {
-    @apply font-sans;
+    @apply font-geometric;
   }
 }
