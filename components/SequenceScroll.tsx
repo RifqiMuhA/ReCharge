@@ -21,50 +21,59 @@ type BubbleConfig = {
 };
 
 const BUBBLE_TEXTS = [
-  "you're not enough",
-  "you should be grateful",
-  "why are you like this",
-  "everyone else is fine",
-  "lazy",
-  "it's all in your head",
-  "try harder",
-  "stop being dramatic",
-  "nobody cares",
-  "just deal with it",
-  "you're overreacting",
-  "get over it",
+  "kamu nggak cukup baik",        // 0
+  "harusnya kamu bersyukur",      // 1
+  "kenapa kamu gitu sih",         // 2
+  "orang lain baik-baik aja",     // 3
+  "males banget",                 // 4
+  "itu cuma perasaan kamu",       // 5
+  "usaha lebih dong",             // 6
+  "jangan lebay",                 // 7
+  "nggak ada yang peduli",        // 8
+  "terima aja",                   // 9
+  "kamu berlebihan",              // 10
+  "udahlah, move on",             // 11
+  "kok gitu doang ngeluh",        // 12
+  "kamu tuh lemah",               // 13
+  "semua orang capek, kamu aja yang lebay", // 14
+  "jangan jadi beban",            // 15
+  "masih muda kok udah burnout",  // 16
+  "yang lain bisa, masa kamu nggak", // 17
+  "jangan manja",                 // 18
+  "kamu nggak spesial",           // 19
+  "emang hidup gitu",             // 20
+  "terlalu sensitif",             // 21
+  "banyak yang lebih susah",      // 22
+  "kamu cuma cari perhatian",     // 23
 ];
 
 const POSITIONED_BUBBLES: BubbleConfig[] = [
-  // Top row — enter from top
-  { id: 0, text: BUBBLE_TEXTS[0], top: '8%', left: '5%', rotate: -4, size: 'md', enterFrom: 'left', appearAt: 0.30 },
-  { id: 1, text: BUBBLE_TEXTS[1], top: '5%', left: '30%', rotate: 2, size: 'lg', enterFrom: 'top', appearAt: 0.35 },
-  { id: 2, text: BUBBLE_TEXTS[2], top: '3%', left: '60%', rotate: -2, size: 'sm', enterFrom: 'top', appearAt: 0.40 },
-  { id: 3, text: BUBBLE_TEXTS[3], top: '7%', left: '82%', rotate: 3, size: 'md', enterFrom: 'right', appearAt: 0.33 },
+  // Top row
+  { id: 0, text: BUBBLE_TEXTS[0], top: '8%', left: '5%', rotate: -4, size: 'md', enterFrom: 'left', appearAt: 0.28 },
+  { id: 1, text: BUBBLE_TEXTS[1], top: '5%', left: '30%', rotate: 2, size: 'lg', enterFrom: 'top', appearAt: 0.32 },
+  { id: 2, text: BUBBLE_TEXTS[2], top: '3%', left: '55%', rotate: -2, size: 'sm', enterFrom: 'top', appearAt: 0.36 },
+  { id: 3, text: BUBBLE_TEXTS[3], top: '7%', left: '78%', rotate: 3, size: 'md', enterFrom: 'right', appearAt: 0.30 },
 
-  // Left side — enter from left
-  { id: 4, text: BUBBLE_TEXTS[4], top: '22%', left: '2%', rotate: 5, size: 'sm', enterFrom: 'left', appearAt: 0.38 },
-  { id: 5, text: BUBBLE_TEXTS[5], top: '40%', left: '3%', rotate: -3, size: 'lg', enterFrom: 'left', appearAt: 0.45 },
-  { id: 6, text: BUBBLE_TEXTS[6], top: '58%', left: '1%', rotate: 2, size: 'md', enterFrom: 'left', appearAt: 0.50 },
-  { id: 7, text: BUBBLE_TEXTS[7], top: '75%', left: '4%', rotate: -5, size: 'sm', enterFrom: 'left', appearAt: 0.55 },
+  // Left side
+  { id: 5, text: BUBBLE_TEXTS[5], top: '40%', left: '3%', rotate: -3, size: 'lg', enterFrom: 'left', appearAt: 0.40 },
+  { id: 6, text: BUBBLE_TEXTS[6], top: '58%', left: '1%', rotate: 2, size: 'md', enterFrom: 'left', appearAt: 0.46 },
+  { id: 7, text: BUBBLE_TEXTS[7], top: '75%', left: '4%', rotate: -5, size: 'sm', enterFrom: 'left', appearAt: 0.50 },
 
-  // Right side — enter from right
-  { id: 8, text: BUBBLE_TEXTS[8], top: '20%', left: '80%', rotate: -3, size: 'md', enterFrom: 'right', appearAt: 0.36 },
-  { id: 9, text: BUBBLE_TEXTS[9], top: '38%', left: '82%', rotate: 4, size: 'sm', enterFrom: 'right', appearAt: 0.42 },
-  { id: 10, text: BUBBLE_TEXTS[10], top: '55%', left: '78%', rotate: -2, size: 'lg', enterFrom: 'right', appearAt: 0.48 },
-  { id: 11, text: BUBBLE_TEXTS[11], top: '72%', left: '83%', rotate: 3, size: 'md', enterFrom: 'right', appearAt: 0.53 },
+  // Right side
+  { id: 8, text: BUBBLE_TEXTS[8], top: '20%', left: '80%', rotate: -3, size: 'md', enterFrom: 'right', appearAt: 0.33 },
+  { id: 10, text: BUBBLE_TEXTS[10], top: '55%', left: '78%', rotate: -2, size: 'lg', enterFrom: 'right', appearAt: 0.44 },
+  { id: 11, text: BUBBLE_TEXTS[11], top: '72%', left: '83%', rotate: 3, size: 'md', enterFrom: 'right', appearAt: 0.48 },
 
-  // Bottom row — enter from bottom
-  { id: 12, text: BUBBLE_TEXTS[0], top: '85%', left: '8%', rotate: 3, size: 'sm', enterFrom: 'bottom', appearAt: 0.58 },
-  { id: 13, text: BUBBLE_TEXTS[3], top: '88%', left: '35%', rotate: -2, size: 'md', enterFrom: 'bottom', appearAt: 0.60 },
-  { id: 14, text: BUBBLE_TEXTS[6], top: '90%', left: '55%', rotate: 4, size: 'sm', enterFrom: 'bottom', appearAt: 0.62 },
-  { id: 15, text: BUBBLE_TEXTS[9], top: '86%', left: '75%', rotate: -4, size: 'lg', enterFrom: 'bottom', appearAt: 0.56 },
+  // Bottom row
+  { id: 12, text: BUBBLE_TEXTS[14], top: '85%', left: '8%', rotate: 3, size: 'sm', enterFrom: 'bottom', appearAt: 0.55 },
+  { id: 13, text: BUBBLE_TEXTS[15], top: '88%', left: '30%', rotate: -2, size: 'md', enterFrom: 'bottom', appearAt: 0.58 },
+  { id: 15, text: BUBBLE_TEXTS[17], top: '86%', left: '72%', rotate: -4, size: 'lg', enterFrom: 'bottom', appearAt: 0.53 },
 
-  // Inner scattered — closer to illustration
-  { id: 16, text: BUBBLE_TEXTS[2], top: '18%', left: '20%', rotate: -6, size: 'sm', enterFrom: 'left', appearAt: 0.52 },
-  { id: 17, text: BUBBLE_TEXTS[5], top: '16%', left: '65%', rotate: 5, size: 'sm', enterFrom: 'right', appearAt: 0.54 },
-  { id: 18, text: BUBBLE_TEXTS[8], top: '65%', left: '18%', rotate: 3, size: 'sm', enterFrom: 'left', appearAt: 0.58 },
-  { id: 19, text: BUBBLE_TEXTS[11], top: '68%', left: '68%', rotate: -3, size: 'sm', enterFrom: 'right', appearAt: 0.60 },
+  // Inner scattered
+  { id: 16, text: BUBBLE_TEXTS[2], top: '18%', left: '20%', rotate: -6, size: 'sm', enterFrom: 'left', appearAt: 0.50 },
+  { id: 17, text: BUBBLE_TEXTS[5], top: '16%', left: '65%', rotate: 5, size: 'sm', enterFrom: 'right', appearAt: 0.52 },
+  { id: 18, text: BUBBLE_TEXTS[8], top: '65%', left: '18%', rotate: 3, size: 'sm', enterFrom: 'left', appearAt: 0.56 },
+  { id: 19, text: BUBBLE_TEXTS[11], top: '68%', left: '68%', rotate: -3, size: 'sm', enterFrom: 'right', appearAt: 0.58 },
 ];
 
 const sizeClasses: Record<string, string> = {
@@ -227,11 +236,14 @@ export default function SequenceScroll() {
     };
   }, [images, currentFrameIndex]);
 
-  // Overlays
+  // Overlays and Effects
   const isLoaded = loadedCount >= Math.min(FRAME_COUNT, 30); // Consider loaded when first 30 frames are ready
 
   const opacity35 = useTransform(scrollYProgress, [0.15, 0.25, 0.45, 0.55], [0, 1, 1, 0]);
   const y35 = useTransform(scrollYProgress, [0.15, 0.55], ['10%', '-10%']);
+
+  // Vignette effect gets darker as scrolling progresses to build the "dark" mood
+  const vignetteOpacity = useTransform(scrollYProgress, [0.2, 0.5, 0.8], [0, 0.6, 0.85]);
 
   return (
     <div ref={containerRef} className="relative h-[500vh] bg-floral-white">
@@ -308,6 +320,14 @@ export default function SequenceScroll() {
           className="absolute inset-0 w-full h-full pointer-events-none z-10 mix-blend-multiply"
         />
 
+        {/* Dark Vignette Effect (Behind Bubbles, In Front of Canvas) */}
+        <motion.div 
+          style={{ opacity: vignetteOpacity }}
+          className="absolute inset-0 pointer-events-none z-15 object-cover"
+        >
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(6,12,10,0.8)_85%,rgba(6,12,10,0.95)_100%)]" />
+        </motion.div>
+
         {/* Antigravity Bubbles */}
         <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
           {POSITIONED_BUBBLES.map((bubble) => (
@@ -326,14 +346,14 @@ export default function SequenceScroll() {
             {/* @ts-ignore */}
             <TextType
               as="h2"
-              className="text-4xl md:text-5xl lg:text-7xl font-tt-commons font-bold text-pine-teal tracking-tight drop-shadow-md"
+              className="text-4xl md:text-5xl lg:text-7xl font-geometric font-bold text-pine-teal tracking-tight drop-shadow-md"
               text={["dimulai dari\nsatu notifikasi."]}
               textColors={["#15221b"]}
               typingSpeed={70}
               loop={false}
               deletingSpeed={40}
               pauseDuration={2000}
-              showCursor={true}
+              showCursor={false}
               cursorCharacter="|"
               cursorClassName="text-canary-yellow"
             />

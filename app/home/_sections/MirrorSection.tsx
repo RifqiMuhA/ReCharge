@@ -1,7 +1,11 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import ScrollReveal from '@/components/ui/scroll-reveal'; 
+import ScrollReveal from '@/components/ui/scroll-reveal';
+import Image from 'next/image';
+import scrollHpImg from '@/components/photos/home/scroll-hp.png';
+import alarmImg from '@/components/photos/home/alarm.png';
+import sleepImg from '@/components/photos/home/sleep.png';
 
 /* ──────────────────────────────────────────────
    Phase 1 Data: Scroll Reveal Kalimat
@@ -68,18 +72,98 @@ export default function MirrorSection() {
           ========================================= */}
       <div className="relative z-10 w-full max-w-5xl mx-auto px-6 pt-24 pb-16">
         {phase1Texts.map((text, i) => (
-          <div key={i} className="min-h-[50vh] flex flex-col items-center justify-center text-center">
-            <ScrollReveal
-              baseOpacity={0.1}
-              enableBlur={true}
-              baseRotation={1}
-              blurStrength={6}
-              wordAnimationEnd="bottom center"
-              rotationEnd="bottom center"
-              textClassName="text-floral-white font-tt-commons font-semibold text-[clamp(1.5rem,4vw,3.5rem)] leading-tight tracking-tight"
-            >
-              {text}
-            </ScrollReveal>
+          <div key={i} className="relative min-h-[50vh] flex flex-col items-center justify-center text-center">
+
+            {i === 0 && (
+              <div
+                className="absolute left-1/2 top-1/2 z-0 pointer-events-none
+                           w-[105px] sm:w-[130px] md:w-[145px] lg:w-[190px]"
+                style={{ transform: 'translateX(calc(50.5vw - 100%)) translateY(-50%) rotate(-23deg)' }}
+                aria-hidden="true"
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{
+                    opacity: { duration: 0.8 },
+                    y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                >
+                  <Image
+                    src={scrollHpImg}
+                    alt="Decorative Phone"
+                    className="w-full h-auto object-contain drop-shadow-2xl opacity-90"
+                  />
+                </motion.div>
+              </div>
+            )}
+
+            {i === 2 && (
+              <div
+                className="absolute left-[-5%] sm:left-[0%] md:left-[-3%] lg:left-[-13%] top-[37%] md:top-[27%] -translate-y-1/2 z-0 pointer-events-none
+                           w-[110px] sm:w-[140px] md:w-[160px] lg:w-[210px]"
+                style={{ transform: 'rotate(-6deg)' }}
+                aria-hidden="true"
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{
+                    opacity: { duration: 0.8 },
+                    y: { duration: 4.5, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                >
+                  <Image
+                    src={alarmImg}
+                    alt="Decorative Alarm"
+                    className="w-full h-auto object-contain drop-shadow-xl opacity-90"
+                  />
+                </motion.div>
+              </div>
+            )}
+            {i === 4 && (
+              <div
+                className="absolute left-1/2 top-1/2 z-0 pointer-events-none
+                           w-[170px] sm:w-[195px] md:w-[300px] lg:w-[500px]"
+                style={{ transform: 'translateX(calc(57vw - 100%)) translateY(-40%) rotate(-12deg)' }}
+                aria-hidden="true"
+              >
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  animate={{ y: [0, -10, 0] }}
+                  transition={{
+                    opacity: { duration: 0.8 },
+                    y: { duration: 4.2, repeat: Infinity, ease: "easeInOut" }
+                  }}
+                >
+                  <Image
+                    src={sleepImg}
+                    alt="Decorative Sleep"
+                    className="w-full h-auto object-contain drop-shadow-xl opacity-90"
+                  />
+                </motion.div>
+              </div>
+            )}
+
+            <div className="relative z-10 w-full">
+              <ScrollReveal
+                baseOpacity={0.1}
+                enableBlur={true}
+                baseRotation={1}
+                blurStrength={6}
+                wordAnimationEnd="bottom center"
+                rotationEnd="bottom center"
+                textClassName="text-floral-white font-tt-commons font-semibold text-[clamp(1.5rem,4vw,3.5rem)] leading-tight tracking-tight relative z-10 mx-auto"
+              >
+                {text}
+              </ScrollReveal>
+            </div>
           </div>
         ))}
       </div>
@@ -89,10 +173,10 @@ export default function MirrorSection() {
           ========================================= */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-48 pt-24 border-t border-floral-white/5">
         <div className="flex flex-col md:flex-row gap-16 md:gap-24 relative">
-          
+
           {/* Left Column: Social Media (Sticky) */}
           <div className="md:w-5/12 static md:sticky top-32 h-fit">
-            <motion.h3 
+            <motion.h3
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -100,10 +184,10 @@ export default function MirrorSection() {
             >
               Yang kamu post
             </motion.h3>
-            
+
             <div className="flex flex-col gap-6">
               {socialPosts.map((post, i) => (
-                <motion.div 
+                <motion.div
                   key={i}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
@@ -133,7 +217,7 @@ export default function MirrorSection() {
             <h3 className="text-blush-pop text-sm font-geometric tracking-[0.2em] uppercase mb-16 md:mb-24">
               Yang sesungguhnya kamu rasain
             </h3>
-            
+
             <div className="flex flex-col gap-40 md:gap-64">
               {trueFeelings.map((feeling, i) => (
                 <motion.div
@@ -149,7 +233,7 @@ export default function MirrorSection() {
               ))}
             </div>
           </div>
-          
+
         </div>
       </div>
 
