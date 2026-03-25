@@ -100,10 +100,10 @@ function Bubble({ bubble, scrollYProgress }: { bubble: BubbleConfig; scrollYProg
   const fadeOutStart = 0.92;
   const fadeOutEnd = 0.98;
 
-  const opacity = useTransform(scrollYProgress, [fadeStart, fadeIn, fadeOutStart, fadeOutEnd], [0, 1, 1, 0]);
-  const x = useTransform(scrollYProgress, [fadeStart, fadeIn], [offsetX, 0]);
-  const y = useTransform(scrollYProgress, [fadeStart, fadeIn], [offsetY, 0]);
-  const scale = useTransform(scrollYProgress, [fadeStart, fadeIn], [0.1, 1]);
+  const opacity = useTransform(scrollYProgress, [fadeStart, fadeIn, fadeOutStart, fadeOutEnd], [0, 1, 1, 0], { clamp: true });
+  const x = useTransform(scrollYProgress, [fadeStart, fadeIn], [offsetX, 0], { clamp: true });
+  const y = useTransform(scrollYProgress, [fadeStart, fadeIn], [offsetY, 0], { clamp: true });
+  const scale = useTransform(scrollYProgress, [fadeStart, fadeIn], [0.1, 1], { clamp: true });
 
   return (
     <motion.div
@@ -120,7 +120,7 @@ function Bubble({ bubble, scrollYProgress }: { bubble: BubbleConfig; scrollYProg
       className="pointer-events-none z-20"
     >
       <div
-        className={`${sizeClasses[bubble.size]} text-[#15221bff] font-tt-commons font-bold tracking-wide whitespace-nowrap`}
+        className={`${sizeClasses[bubble.size]} bg-floral-white/95 backdrop-blur-sm shadow-[0_4px_12px_rgba(0,0,0,0.2)] rounded-[20px] text-pine-teal font-tt-commons font-bold tracking-wide whitespace-nowrap`}
       >
         {bubble.text}
       </div>
@@ -323,7 +323,7 @@ export default function SequenceScroll() {
         {/* Dark Vignette Effect (Behind Bubbles, In Front of Canvas) */}
         <motion.div 
           style={{ opacity: vignetteOpacity }}
-          className="absolute inset-0 pointer-events-none z-15 object-cover"
+          className="absolute inset-0 pointer-events-none z-[15] object-cover"
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(6,12,10,0.8)_85%,rgba(6,12,10,0.95)_100%)]" />
         </motion.div>
@@ -341,13 +341,13 @@ export default function SequenceScroll() {
           {/* 35% Overlay */}
           <motion.div
             style={{ opacity: opacity35, y: y35 }}
-            className="absolute inset-0 flex flex-col items-start justify-center pl-[5%] md:pl-[10%]"
+            className="absolute inset-0 flex flex-col items-center justify-center text-center"
           >
             {/* @ts-ignore */}
             <TextType
               as="h2"
               className="text-4xl md:text-5xl lg:text-7xl font-geometric font-bold text-pine-teal tracking-tight drop-shadow-md"
-              text={["dimulai dari\nsatu notifikasi."]}
+              text={["dimulai dari\nsatu ketikan."]}
               textColors={["#15221b"]}
               typingSpeed={70}
               loop={false}

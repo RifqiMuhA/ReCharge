@@ -7,7 +7,7 @@ export default function Footer() {
             <div className="flex flex-col md:flex-row justify-between items-start mt-12 w-full max-w-7xl mx-auto flex-grow">
                 {/* Left Side: Brand Name & Minimalist SVG */}
                 <div className="flex flex-col items-start gap-12 w-full md:w-1/2">
-                    <h2 className="text-7xl md:text-9xl font-tt-commons font-bold tracking-tight text-[#F5F5ED]">recharge<span className="animate-blink">_</span></h2>
+                    <h2 className="text-7xl lg:text-9xl font-tt-commons font-bold tracking-tight text-[#F5F5ED]">recharge<span className="animate-blink">_</span></h2>
 
                     {/* Minimalist Sparkle/Star SVG (Aesthetic Awwwards style) */}
                     <div className="hidden md:block opacity-70 mt-4 cursor-target">
