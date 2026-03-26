@@ -1,0 +1,43 @@
+<svg viewBox="0 0 1000 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Minimalist Hand-Drawn Running Characters -->
+  <!-- Door on the far left -->
+  <rect x="50" y="50" width="120" height="450" stroke="#1A1A1A" stroke-width="6" fill="#F2F2F2"/>
+  <line x1="60" y1="250" x2="70" y2="250" stroke="#1A1A1A" stroke-width="4"/>
+  <line x1="60" y1="280" x2="70" y2="280" stroke="#1A1A1A" stroke-width="4"/>
+  
+  <!-- Developer Running (with 4 arms carrying a giant monitor) -->
+  <!-- Legs -->
+  <path d="M 400 350 L 370 450 L 320 460" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M 430 350 L 500 420 L 480 480" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <!-- Body/Monitor combo -->
+  <path d="M 330 180 L 520 220 L 500 380 L 310 340 Z" fill="#F2F2F2" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Frantic arms wrapping around monitor -->
+  <path d="M 320 250 C 300 250, 280 200, 310 210" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+  <path d="M 400 380 C 380 420, 350 400, 360 380" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+  <!-- Head poking over monitor -->
+  <path d="M 410 190 C 400 120, 480 130, 450 190" fill="#F2F2F2" stroke="#1A1A1A" stroke-width="4"/>
+  <!-- Nose (plug shaped) -->
+  <path d="M 410 150 L 370 140 L 380 160 Z" fill="#F2F2F2" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Eyes frantic -->
+  <ellipse cx="430" cy="140" rx="4" ry="8" fill="#1A1A1A"/>
+  <ellipse cx="450" cy="140" rx="4" ry="8" fill="#1A1A1A"/>
+  
+  <!-- Designer Running behind -->
+  <!-- Legs -->
+  <path d="M 700 350 C 650 380, 680 460, 650 480 L 610 490" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M 730 350 C 760 400, 750 480, 800 450 L 820 480" stroke="#1A1A1A" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <!-- Body puffy -->
+  <path d="M 680 200 C 650 250, 620 300, 660 380 C 720 380, 780 300, 730 200 Z" fill="#F2F2F2" stroke="#1A1A1A" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Head -->
+  <path d="M 700 200 C 680 120, 750 120, 730 200 Z" fill="#F2F2F2" stroke="#1A1A1A" stroke-width="4"/>
+  <path d="M 700 150 L 670 140 L 690 160 Z" stroke="#1A1A1A" stroke-width="4" fill="#F2F2F2"/>
+  <ellipse cx="710" cy="140" rx="3" ry="8" fill="#1A1A1A"/>
+  
+  <!-- Thumbs up arm -->
+  <path d="M 680 250 C 640 230, 620 280, 640 250" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round" fill="none"/>
+  
+  <!-- Floating Notes "GUIDE" -->
+  <path d="M 850 150 L 920 180 L 900 280 L 830 250 Z" stroke="#1A1A1A" stroke-width="4" fill="#F2F2F2" stroke-linejoin="round"/>
+  <!-- Cat at bottom right -->
+  <path d="M 900 400 L 900 450 M 930 400 L 930 450 M 880 400 L 940 400 M 890 380 L 895 360 L 905 380 M 920 380 L 925 360 L 935 380" stroke="#1A1A1A" stroke-width="4" stroke-linecap="round"/>
+</svg>

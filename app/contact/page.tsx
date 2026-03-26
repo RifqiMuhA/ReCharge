@@ -6,10 +6,6 @@ import Image from "next/image";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import ScrollToPlugin from "gsap/ScrollToPlugin";
-
-// ... (other imports)
-
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 import featherImg from "@/components/photos/contact/feather.webp";
 import hands1Img from "@/components/photos/contact/hands1.webp";
 import bird1Img from "@/components/photos/contact/bird_1.webp";
@@ -23,6 +19,11 @@ import sarangBurungImg from "@/components/photos/contact/sarang_burung.webp";
 import WorldMap from "@/components/ui/world-map";
 import MapLocationModal from "@/components/ui/map-location-modal";
 import { motion } from "motion/react";
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+// We'll reuse birdLetter1Img as the standalone letter falling for now since there's no dedicated letter.webp
+// Alternatively, we can use a basic UI element for the letter. Let's use a subtle div styled as a letter.
 
 // We'll reuse birdLetter1Img as the standalone letter falling for now since there's no dedicated letter.webp
 // Alternatively, we can use a basic UI element for the letter. Let's use a subtle div styled as a letter.
@@ -549,7 +550,7 @@ export default function ContactPage() {
                             Mari tulis bab baru untuk pulih bersama.
                         </h1>
 
-                        <div className="flex flex-col gap-3 text-pine-teal text-md md:text-lg font-geometric tracking-tight leading-relaxed mt-2">
+                        <div className="flex flex-col gap-3 text-pine-teal text-sm md:text-md font-geometric tracking-tight leading-relaxed mt-2">
                             <p className="opacity-80">
                                 <span className="text-blush-pop mr-1">(*)</span> Siap untuk
                                 memulai perjalanan resiliensi Anda? <br />
@@ -557,7 +558,7 @@ export default function ContactPage() {
                             </p>
                             <Link
                                 href="mailto:halo@recharge.id"
-                                className="font-bold text-lg border-b border-pine-teal pb-0.5 inline-table w-max hover:text-blush-pop hover:border-blush-pop transition-colors tracking-tight"
+                                className="font-bold border-b border-pine-teal pb-0.5 inline-table w-max hover:text-blush-pop hover:border-blush-pop transition-colors tracking-tight"
                             >
                                 halo@recharge.id
                             </Link>
