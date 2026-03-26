@@ -1,7 +1,6 @@
 import PreHeroSection from './_sections/PreHeroSection';
 import HeroSection from './_sections/HeroSection';
-import MirrorSection from './_sections/MirrorSection';
-import DiagnosisSection from './_sections/DiagnosisSection';
+import MirrorDiagnosisTransition from '@/components/MirrorDiagnosisTransition';
 import CtaSection from './_sections/CtaSection';
 
 export const metadata = {
@@ -15,8 +14,7 @@ export default function HomePage() {
     <>
       <PreHeroSection />
       <HeroSection />
-      <MirrorSection />
-      <DiagnosisSection />
+      <MirrorDiagnosisTransition />
       <CtaSection />
     </>
   );

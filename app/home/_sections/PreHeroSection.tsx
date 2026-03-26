@@ -9,6 +9,7 @@ import {
   useMotionValueEvent,
 } from "framer-motion";
 import Image from "next/image";
+import CursorTrail from "@/components/ui/cursor-trail";
 
 import headingImg from "@/components/photos/home/landing/heading.png";
 import org1 from "@/components/photos/home/landing/org-1.png";
@@ -32,7 +33,7 @@ const people = [
     id: 0,
     img: org1,
     chat: chat1,
-    size: "clamp(90px, 16vw, 210px)",
+    size: "clamp(90px, 16vw, 220px)",
     chatClass:
       "absolute -top-[25%] right-[-120%] md:-top-[10%] md:right-[-60%] w-[120px] md:w-[170px]",
   },
@@ -40,25 +41,26 @@ const people = [
     id: 1,
     img: org2,
     chat: chat2,
-    size: "clamp(100px, 18vw, 250px)",
+    size: "clamp(110px, 20vw, 275px)",
     chatClass:
-      "absolute -top-[25%] right-[-120%] md:-top-[15%] md:right-[-55%] w-[130px] md:w-[190px]",
+      "absolute -top-[20%] right-[-95%] md:-top-[7%] md:right-[-40%] w-[130px] md:w-[190px]",
   },
   {
     id: 2,
     img: org3,
     chat: chat3,
-    size: "clamp(120px, 22vw, 290px)",
+    size: "clamp(120px, 20vw, 313px)",
+    offsetY: "clamp(20px, 4vw, 50px)",
     chatClass:
-      "absolute -top-[25%] right-[-75%] md:-top-[15%] md:right-[-30%] w-[130px] md:w-[190px]",
+      "absolute -top-[25%] right-[-75%] md:-top-[10%] md:right-[-30%] w-[130px] md:w-[190px]",
   },
   {
     id: 3,
     img: org4,
     chat: chat4,
-    size: "clamp(110px, 20vw, 270px)",
+    size: "clamp(110px, 20vw, 275px)",
     chatClass:
-      "absolute -top-[25%] right-[-40%] md:-top-[10%] md:right-[-25%] w-[90px] md:w-[120px]",
+      "absolute -top-[25%] right-[-40%] md:-top-[5%] md:right-[-23%] w-[90px] md:w-[120px]",
   },
 ];
 
@@ -72,11 +74,13 @@ export default function PreHeroSection() {
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (latest < 0.08) setStep(-1);
-    else if (latest < 0.2) setStep(0);
-    else if (latest < 0.32) setStep(1);
-    else if (latest < 0.44) setStep(2);
-    else if (latest < 0.56) setStep(3);
+    // Delay the appearance of the first person by expanding the first threshold.
+    // Gives time for the title and decorations to be admired while user scrolls the first bit.
+    if (latest < 0.20) setStep(-1);
+    else if (latest < 0.32) setStep(0);
+    else if (latest < 0.44) setStep(1);
+    else if (latest < 0.56) setStep(2);
+    else if (latest < 0.68) setStep(3);
     else setStep(4);
   });
 
@@ -101,13 +105,15 @@ export default function PreHeroSection() {
         }}
         className="sticky top-0 h-screen w-full bg-floral-white overflow-hidden flex flex-col shadow-2xl origin-top"
       >
+        <CursorTrail color="rgba(255, 171, 210, 0.2)" size={180} blur={40} />
+
         {/* ── hias1 — bunga+kotak hijau, pojok kanan atas ── */}
         <div className="absolute right-[1%] md:right-[20%] top-[4%] md:top-[10%] z-[6] pointer-events-none">
           <motion.div
             initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
             whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.5, type: "spring" }}
+            transition={{ duration: 1, delay: 1.6, type: "spring" }}
           >
             <motion.div
               animate={{ y: [0, -8, 0], rotate: [0, 5, 0] }}
@@ -125,7 +131,7 @@ export default function PreHeroSection() {
             initial={{ opacity: 0, scale: 0.75, rotate: -18 }}
             whileInView={{ opacity: 0.9, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.15 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
             className="w-[52px] md:w-[78px]"
           >
             <motion.div
@@ -143,7 +149,7 @@ export default function PreHeroSection() {
             initial={{ opacity: 0, scale: 0.72, rotate: 14 }}
             whileInView={{ opacity: 0.85, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.85, delay: 0.22 }}
+            transition={{ duration: 0.85, delay: 1.4 }}
             className="w-[24px] md:w-[36px]"
           >
             <motion.div
@@ -161,7 +167,7 @@ export default function PreHeroSection() {
             initial={{ opacity: 0, scale: 0.72 }}
             whileInView={{ opacity: 0.85, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.85, delay: 0.28 }}
+            transition={{ duration: 0.85, delay: 2.0 }}
             className="w-[18px] md:w-[26px]"
           >
             <motion.div
@@ -179,7 +185,7 @@ export default function PreHeroSection() {
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 0.88, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.9, delay: 0.28 }}
+            transition={{ duration: 0.9, delay: 2.6 }}
             className="w-[44px] md:w-[64px]"
           >
             <motion.div
@@ -197,7 +203,7 @@ export default function PreHeroSection() {
             initial={{ opacity: 0, scale: 0.72, rotate: -14 }}
             whileInView={{ opacity: 0.8, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.85, delay: 0.3 }}
+            transition={{ duration: 0.85, delay: 2.2 }}
             className="w-[24px] md:w-[36px]"
           >
             <motion.div
@@ -215,7 +221,7 @@ export default function PreHeroSection() {
             initial={{ opacity: 0, scale: 0.7, rotate: -8 }}
             whileInView={{ opacity: 0.75, scale: 1, rotate: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.95, delay: 0.35 }}
+            transition={{ duration: 0.95, delay: 2.4 }}
             className="w-[56px] md:w-[84px]"
           >
             <motion.div
@@ -235,7 +241,7 @@ export default function PreHeroSection() {
               initial={{ opacity: 0, scale: 0.7, rotate: 8 }}
               whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.9, delay: 0.25, type: "spring" }}
+              transition={{ duration: 0.9, delay: 1.8, type: "spring" }}
               className="w-[34px] md:w-[50px]"
             >
               <motion.div
@@ -251,7 +257,7 @@ export default function PreHeroSection() {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             className="relative z-[20] font-tt-commons text-pine-teal/70 text-sm md:text-base text-center mb-4 md:mb-6"
           >
             Kamu mungkin sudah burnout — tanpa menyadarinya
@@ -261,7 +267,7 @@ export default function PreHeroSection() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
             className="relative z-[20] w-full px-4 origin-center"
             style={{ transform: "scale(1.5)" }}
           >
@@ -288,7 +294,7 @@ export default function PreHeroSection() {
                 <div
                   key={person.id}
                   className="relative flex-shrink-0 flex justify-center items-end"
-                  style={{ width: person.size }}
+                  style={{ width: person.size, transform: person.offsetY ? `translateY(${person.offsetY})` : undefined }}
                 >
                   <div className="relative w-full" style={{ visibility: showPerson ? "visible" : "hidden" }}>
                     <AnimatePresence>

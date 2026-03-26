@@ -148,7 +148,7 @@ export default function DiagnosisSection() {
   ];
 
   return (
-    <section className="relative min-h-screen py-24 md:py-32 overflow-hidden grain-overlay" style={{ background: '#F5F5ED', WebkitOverflowScrolling: 'touch' }}>
+    <section className="relative min-h-screen pt-24 pb-12 md:pt-32 md:pb-16 overflow-hidden grain-overlay" style={{ background: '#F5F5ED', WebkitOverflowScrolling: 'touch' }}>
 
       {/* Background soft styling */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden flex flex-col justify-between">

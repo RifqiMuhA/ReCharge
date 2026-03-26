@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import TextType from '@/components/ui/text-type';
 import Noise from '@/components/ui/noise';
 
@@ -239,7 +239,6 @@ export default function SequenceScroll() {
   }, [images, currentFrameIndex]);
 
   // Overlays and Effects
-  const isLoaded = loadedCount >= Math.min(FRAME_COUNT, 30); // Consider loaded when first 30 frames are ready
 
   // Track when text area is scrolled into view to trigger typing
   const [showTyping, setShowTyping] = useState(false);
@@ -263,40 +262,6 @@ export default function SequenceScroll() {
 
   return (
     <div ref={containerRef} className="relative h-[500vh] bg-floral-white">
-
-      {/* Preloader */}
-      <AnimatePresence mode="wait">
-        {!isLoaded && (
-          <motion.div
-            key="preloader"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] } }}
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-floral-white"
-          >
-            <div className="overflow-hidden">
-              <motion.div
-                initial={{ y: "100%" }}
-                animate={{ y: "0%" }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-[12vw] md:text-[8vw] font-tt-commons font-bold text-pine-teal tracking-tighter mix-blend-difference leading-none"
-              >
-                {Math.round((loadedCount / FRAME_COUNT) * 100)}%
-              </motion.div>
-            </div>
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
-              <span className="text-pine-teal font-geometric text-sm tracking-widest uppercase mb-4 opacity-50">
-                Loading the Experience
-              </span>
-              <div className="w-64 h-1 bg-pine-teal/10 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-pine-teal rounded-full"
-                  style={{ width: `${(loadedCount / FRAME_COUNT) * 100}%` }}
-                />
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Sticky Canvas Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-floral-white grain-overlay flex flex-col items-center justify-center">
