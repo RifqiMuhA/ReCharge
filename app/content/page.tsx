@@ -22,9 +22,11 @@ import smiley4 from '@/components/photos/content/smiley4.webp';
 import guiltyCharacters from '@/components/photos/content/guilty-characters.svg';
 import guiltyCalendar from '@/components/photos/content/guilty-calendar.svg';
 import guiltyDesk from '@/components/photos/content/guilty-desk.svg';
+import stressGif from '@/components/photos/content/Illustrations-ManuFerreira-ezgif.com-effects.gif';
 
 import newHeroGif from '@/components/photos/content/00926f5180d7aa056e6e242ba821de90_gif550413-ezgif.com-effects.webp';
 import dummySkater from '@/components/photos/content/ezgif-split/6.svg';
+import burnoutSvg from '@/components/photos/content/Jangan biarkan burnout.svg';
 
 const images = [
   smilley1.src,
@@ -32,6 +34,30 @@ const images = [
   smiley3.src,
   smiley4.src,
 ];
+
+const topComments = [
+  "GA ADA YANG PEDULI.",
+  "CAPER BANGET SIH.",
+  "NYARI PERHATIAN DOANG.",
+  "SOK PALING MENDERITA.",
+  "LEBAY AMAT JADI ORANG.",
+  "KONTEN SAMPAH.",
+  "GA JELAS BGT KONTENNYA.",
+  "NORAK BANGET SUMPAH."
+];
+
+const bottomComments = [
+  "MENDING HAPUS AKUN.",
+  "GATAU MALU.",
+  "MENDING MENGHILANG AJA.",
+  "GAK PUNYA KARYA.",
+  "DASAR BEBAN.",
+  "UNINSTALL AJA SOSMEDNYA.",
+  "GA COCOK MAIN GINIAN.",
+  "KAMPUNGAN."
+];
+
+
 
 const StarShape = () => (
   <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full">
@@ -76,6 +102,19 @@ export default function ContentPage() {
   const [cursorPos, setCursorPos] = useState({ x: 0, y: 0 });
   const [playPfIntro, setPlayPfIntro] = useState(false);
   const [frame1Key, setFrame1Key] = useState(0);
+  const [hateIndex, setHateIndex] = useState(0);
+
+  useEffect(() => {
+    let interval: ReturnType<typeof setInterval>;
+    if (currentFrame === 2) {
+      interval = setInterval(() => {
+        setHateIndex(prev => (prev + 1) % topComments.length);
+      }, 3500);
+    } else {
+      setHateIndex(0);
+    }
+    return () => clearInterval(interval);
+  }, [currentFrame]);
 
   useEffect(() => {
     const handleFrameUpdate = (e: any) => {
@@ -94,9 +133,14 @@ export default function ContentPage() {
   };
 
   const toggleMute = () => {
-    if (videoRef.current) {
-      videoRef.current.muted = !videoRef.current.muted;
-      setIsMuted(videoRef.current.muted);
+    const iframe = document.getElementById('yt-player') as HTMLIFrameElement;
+    if (iframe && iframe.contentWindow) {
+      if (isMuted) {
+        iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'unMute', args: [] }), '*');
+      } else {
+        iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func: 'mute', args: [] }), '*');
+      }
+      setIsMuted(!isMuted);
     }
   };
 
@@ -175,7 +219,7 @@ export default function ContentPage() {
           scrollTrigger: {
             trigger: revToP1Wrapper,
             start: "top top",
-            end: "+=120%",
+            end: "+=300%",
             pin: true,
             scrub: 1,
           }
@@ -197,9 +241,12 @@ export default function ContentPage() {
             if (counterRef.current) counterRef.current.innerText = this.targets()[0].val.toString();
           },
           onComplete: function () {
-            if (counterRef.current) gsap.to(counterRef.current, { color: '#FF4500', scale: 1.05, duration: 0.1, yoyo: true, repeat: 5 });
+            if (counterRef.current) gsap.to(counterRef.current, { color: '#FFF946', scale: 1.05, duration: 0.1, yoyo: true, repeat: 5 });
           }
         }, 0.2);
+
+        // Add dummy pause to hold the pin longer so the user can read 87%
+        tlRev.to({}, { duration: 0.5 });
 
         tlRev.fromTo('.split-text-target',
           { y: 50, opacity: 0 },
@@ -212,12 +259,22 @@ export default function ContentPage() {
       if (videoSectionRef.current && videoWrapperRef.current && videoTextRef.current) {
         const videoTl = gsap.timeline({
           scrollTrigger: {
+            id: 'video-trigger',
             trigger: videoSectionRef.current,
             start: 'top top',
             end: '+=100%',
             pin: true,
             scrub: 1,
             invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              const cursor = document.getElementById('unmute-cursor');
+              if (cursor) {
+                cursor.style.display = self.progress > 0.95 ? 'none' : 'flex';
+              }
+              if (videoSectionRef.current) {
+                videoSectionRef.current.style.cursor = self.progress > 0.95 ? 'auto' : 'none';
+              }
+            }
           }
         });
 
@@ -238,7 +295,7 @@ export default function ContentPage() {
           },
           xPercent: 0,
           yPercent: 0,
-          borderRadius: '4rem',
+          borderRadius: '1rem',
           ease: 'power2.inOut'
         }, 0);
 
@@ -272,8 +329,8 @@ export default function ContentPage() {
           onLeaveBack: () => {
             setPlayPfIntro(false);
             autoTl.pause(0);
-            if (pfSectionRef.current) gsap.set(pfSectionRef.current, { backgroundColor: '#E0DDD5' });
-            gsap.set('.pf-text-wrapper', { color: '#1A1A1A' });
+            if (pfSectionRef.current) gsap.set(pfSectionRef.current, { backgroundColor: '#F5F5ED' });
+            gsap.set('.pf-text-wrapper', { color: '#15221b' });
             gsap.set('.pf-popup', { opacity: 0, y: 0, scale: 0.75 });
           }
         });
@@ -286,8 +343,9 @@ export default function ContentPage() {
           ease: 'power2.inOut',
           scrollTrigger: {
             trigger: pfSectionRef.current,
-            start: 'center center',
-            end: '+=80%',
+            start: 'top top',
+            end: '+=150%',
+            pin: true,
             scrub: 1,
           }
         });
@@ -341,7 +399,7 @@ export default function ContentPage() {
   return (
     <ReactLenis root>
       <main
-        style={{ backgroundColor: '#f3f4ea' }}
+        style={{ backgroundColor: '#F5F5ED' }}
         className="min-h-screen relative text-pine-teal"
       >
         {/* ── BRUSHED STYLE SVG DEFS ── */}
@@ -353,7 +411,7 @@ export default function ContentPage() {
               <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 12 -5" in="noise" result="coloredNoise" />
               <feDisplacementMap in="SourceGraphic" in2="coloredNoise" scale="4" xChannelSelector="R" yChannelSelector="G" />
             </filter>
-            
+
             {/* Torn Paper Clip Path (Top) */}
             <clipPath id="torn-edge-top" clipPathUnits="objectBoundingBox">
               <path d="M0,0.05 C0.05,0.01 0.1,0.07 0.15,0.03 C0.2,0.08 0.25,0.02 0.3,0.06 C0.35,0.03 0.4,0.07 0.45,0.02 C0.5,0.06 0.55,0.01 0.6,0.08 C0.65,0.04 0.7,0.07 0.75,0.03 C0.8,0.07 0.85,0.01 0.9,0.08 C0.95,0.03 1,0.05 L1,1 L0,1 Z" />
@@ -399,15 +457,15 @@ export default function ContentPage() {
         </div>
 
         {/* ── SKATER CONTAINER WRAPPER (400vh for scroll room: 100vh per frame) ── */}
-        <div ref={skaterContainerRef} className="relative w-full h-[400vh] bg-[#f3f4ea]">
+        <div ref={skaterContainerRef} className="relative w-full h-[400vh] bg-[#F5F5ED]">
 
           {/* Sticky Container that holds everything fixed in viewport */}
           <div className="sticky top-0 w-full h-screen flex justify-center items-center overflow-hidden">
 
             {/* ── FRAME 0: HERO (Original Burnout) ── */}
             <div className={`absolute inset-0 transition-opacity duration-700 flex justify-center items-center ${currentFrame === 0 ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-              <div className="absolute top-[12%] md:top-[15%] text-center text-4xl leading-[1.1] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6.5rem] font-black font-geometric tracking-tighter w-full px-4 z-20 flex flex-col items-center">
-                <h1 className="flex flex-wrap justify-center items-baseline gap-2 text-pine-teal" style={{ filter: 'url(#ink-bleed)' }}>
+              <div className="absolute top-[12%] md:top-[15%] text-center text-4xl leading-[1.1] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6.5rem] font-geometric tracking-tighter w-full px-4 z-20 flex flex-col items-center">
+                <h1 className="flex flex-wrap justify-center items-baseline gap-2 text-pine-teal">
                   <TypingText text="Jangan " delay={0} duration={40} holdDelay={3000} loop={false} className="block" />
                   <span className="inline-block">&nbsp;</span>
                   <div className="relative inline-block">
@@ -420,13 +478,13 @@ export default function ContentPage() {
                       className="text-pine-teal whitespace-nowrap"
                     />
                   </div>
-                  <div className="relative inline-block ml-2">
+                  <div className="relative inline-block ml-2 font-black" style={{ filter: 'url(#ink-bleed)' }}>
                     <HighlightText
                       text="Burnout"
                       delay={700}
                       aria-hidden="true"
                       className="text-transparent select-none px-[0.12em] block italic"
-                      style={{ 
+                      style={{
                         backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\' preserveAspectRatio=\'none\'%3E%3Cpath d=\'M2,45 Q20,25 50,35 T98,25 Q95,45 98,65 Q80,85 50,75 T2,75 Z\' fill=\'%23FFF946\' opacity=\'0.9\'/%3E%3Cpath d=\'M8,55 Q30,45 50,50 T92,45 Q90,60 92,70 Q60,70 50,65 T8,65 Z\' fill=\'%23FF4500\' opacity=\'0.3\'/%3E%3C/svg%3E")',
                         backgroundSize: '100% 100%',
                         backgroundRepeat: 'no-repeat',
@@ -439,11 +497,11 @@ export default function ContentPage() {
                 </h1>
               </div>
 
-              <h2 className="absolute left-4 md:left-[4%] xl:left-[8%] top-[40%] md:top-[55%] -translate-y-1/2 text-[2rem] md:text-5xl lg:text-[4.5rem] xl:text-[5.5rem] font-black font-geometric text-pine-teal tracking-tighter z-20 md:max-w-[25%] lg:max-w-[30%]" style={{ filter: 'url(#ink-bleed)' }}>
+              <h2 className="absolute left-4 md:left-[4%] xl:left-[8%] top-[40%] md:top-[55%] -translate-y-1/2 text-[2rem] md:text-5xl lg:text-[4.5rem] xl:text-[5.5rem] font-geometric text-pine-teal tracking-tighter z-20 md:max-w-[25%] lg:max-w-[30%]">
                 <TypingText text="Merenggut" delay={1100} duration={40} holdDelay={3000} loop={false} className="inline-block" />
               </h2>
 
-              <h2 className="absolute right-4 md:right-[4%] xl:right-[8%] top-[60%] md:top-[55%] -translate-y-1/2 text-[2rem] md:text-5xl lg:text-[4.5rem] xl:text-[5.5rem] font-black font-geometric text-pine-teal tracking-tighter z-20 text-right flex items-center justify-end md:max-w-[25%] lg:max-w-[30%]">
+              <h2 className="absolute right-4 md:right-[4%] xl:right-[8%] top-[60%] md:top-[55%] -translate-y-1/2 text-[2rem] md:text-5xl lg:text-[4.5rem] xl:text-[5.5rem] font-geometric text-pine-teal tracking-tighter z-20 text-right flex items-center justify-end md:max-w-[25%] lg:max-w-[30%]">
                 <TypingText text="Mentalmu" delay={1500} duration={40} holdDelay={3000} loop={false} className="inline-block" >
                   <TypingTextCursor className="inline-block !h-[0.8em] !w-[0.04em] align-middle bg-[#FF4500] ml-2 -mt-1" />
                 </TypingText>
@@ -515,15 +573,13 @@ export default function ContentPage() {
               <AnimatePresence mode="wait">
                 {currentFrame === 2 && (
                   <motion.div
-                    key={`f2-hate-${frame1Key}`}
-                    className="absolute inset-0"
+                    key={`frame2-${frame1Key}`}
+                    className="absolute inset-0 flex flex-col items-center justify-between px-4 py-8 md:py-16 md:px-[6vw] lg:px-[8vw] xl:px-[10vw]"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.5 }}
                   >
-                    {/* Radial gradient overlay: 'closing in' effect, darkens the edges around the character */}
-                    <div className="absolute inset-0 z-20 pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, transparent 20%, rgba(10, 25, 15, 0.85) 100%)' }}></div>
 
                     {/* TWO BIG BLOCKS: Top and Bottom */}
                     <motion.div
@@ -534,18 +590,18 @@ export default function ContentPage() {
                       exit={{ opacity: 0, y: -30 }}
                       transition={{ duration: 0.6, ease: 'easeInOut' }}
                     >
-                      <h2 className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 lg:gap-x-6 text-3xl md:text-5xl lg:text-[4rem] xl:text-[5rem] font-black tracking-tighter leading-[1.2] text-center w-full">
-                        {['GA', 'ADA', 'YANG', 'PEDULI.'].map((word, i) => (
+                      <h2 className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 lg:gap-x-6 text-3xl md:text-5xl lg:text-[4rem] xl:text-[5rem] font-geometric tracking-tighter leading-[1.2] text-center w-full">
+                        {topComments[hateIndex].split(' ').map((word, i) => (
                           <DecryptedText
-                            key={i}
+                            key={`top-${hateIndex}-${i}`}
                             text={word}
                             animateOn="view"
-                            speed={65}
+                            speed={100}
                             maxIterations={15}
                             sequential
                             revealDirection="start"
                             className="inline-block"
-                            style={{ color: '#B91C1C' }}
+                            style={{ color: '#FFABD2' }}
                             encryptedClassName="opacity-30"
                           />
                         ))}
@@ -554,24 +610,24 @@ export default function ContentPage() {
 
                     <motion.div
                       key="f2-hate-bottom"
-                      className="absolute bottom-[18%] left-0 w-full flex justify-center px-4 md:px-16 z-30"
+                      className="absolute bottom-[8%] left-0 w-full flex justify-center px-4 md:px-16 z-30"
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 30 }}
                       transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.2 }}
                     >
-                      <h2 className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 lg:gap-x-6 text-3xl md:text-5xl lg:text-[4rem] xl:text-[5rem] font-black tracking-tighter leading-[1.2] text-center w-full">
-                        {['MENDING', 'HAPUS', 'AKUN.'].map((word, i) => (
+                      <h2 className="flex flex-wrap items-center justify-center gap-x-3 md:gap-x-5 lg:gap-x-6 text-3xl md:text-5xl lg:text-[4rem] xl:text-[5rem] font-geometric tracking-tighter leading-[1.2] text-center w-full">
+                        {bottomComments[hateIndex].split(' ').map((word, i) => (
                           <DecryptedText
-                            key={i}
+                            key={`bottom-${hateIndex}-${i}`}
                             text={word}
                             animateOn="view"
-                            speed={65}
+                            speed={100}
                             maxIterations={15}
                             sequential
                             revealDirection="end"
                             className="inline-block"
-                            style={{ color: '#2D7A2D' }}
+                            style={{ color: '#8DDEDE' }}
                             encryptedClassName="opacity-30"
                           />
                         ))}
@@ -599,8 +655,8 @@ export default function ContentPage() {
                       exit={{ opacity: 0, x: -30 }}
                       transition={{ duration: 0.6, ease: 'easeInOut' }}
                     >
-                      <h2 className="text-3xl md:text-5xl lg:text-[4rem] xl:text-[5rem] font-black tracking-tighter leading-[1] text-blush-pop text-left max-w-full md:max-w-[50%]">
-                        <TypingText text="Menjadi penjara layar sentuh" delay={200} duration={30} holdDelay={3000} loop={false} className="inline-block" />
+                      <h2 className="text-3xl md:text-5xl lg:text-[4rem] xl:text-[5rem] font-geometric tracking-tighter leading-[1] text-blush-pop text-left max-w-full md:max-w-[50%]">
+                        <TypingText text="Menjadi penjara layar digital" delay={200} duration={30} holdDelay={3000} loop={false} className="inline-block" />
                       </h2>
                     </motion.div>
                     <motion.div
@@ -611,7 +667,7 @@ export default function ContentPage() {
                       exit={{ opacity: 0, x: 30 }}
                       transition={{ duration: 0.6, ease: 'easeInOut', delay: 0.15 }}
                     >
-                      <h2 className="text-3xl md:text-5xl lg:text-[4rem] xl:text-[5rem] font-black tracking-tighter leading-[1] text-blush-pop text-right max-w-full md:max-w-[50%]">
+                      <h2 className="text-3xl md:text-5xl lg:text-[4rem] xl:text-[5rem] font-geometric tracking-tighter leading-[1] text-blush-pop text-right max-w-full md:max-w-[50%]">
                         <TypingText text="yang merampas kebebasan mental." delay={1000} duration={30} holdDelay={3000} loop={false} className="inline-block">
                           <TypingTextCursor className="inline-block !h-[0.8em] !w-[0.04em] align-middle bg-[#FF4500] ml-2 -mt-1" />
                         </TypingText>
@@ -637,7 +693,7 @@ export default function ContentPage() {
             {/* Scroll Indicator – hanya frame 0 */}
             {currentFrame === 0 && (
               <motion.div
-                className="absolute bottom-[6%] text-xs md:text-sm font-bold tracking-[0.2em] uppercase font-geometric pointer-events-none text-pine-teal flex flex-col items-center gap-2"
+                className="absolute bottom-[6%] text-xs md:text-sm tracking-[0.2em] uppercase font-geometric pointer-events-none text-pine-teal flex flex-col items-center gap-2"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 0.5, y: 0 }}
                 transition={{ duration: 1, repeat: Infinity, repeatType: "reverse" }}
@@ -653,79 +709,92 @@ export default function ContentPage() {
 
 
         {/* ── HYBRID SCROLL: REVEAL TO PANEL 1 ── */}
-        <div className="reveal-to-p1-wrapper w-full h-[120vh] relative z-[4] bg-pine-teal">
-          <div className="sticky top-0 w-full h-screen overflow-hidden">
+        <div className="reveal-to-p1-wrapper w-full h-screen relative z-[4] bg-pine-teal overflow-hidden">
+          {/* Scroll Reveal Section */}
+          <section className="reveal-section absolute inset-0 w-full h-full flex flex-col items-center justify-center bg-pine-teal z-[4]">
+            <div className="max-w-6xl mx-auto px-6 text-center w-full">
+              <ScrollReveal
+                baseOpacity={0.1}
+                enableBlur
+                baseRotation={3}
+                blurStrength={4}
+                containerClassName="w-full flex justify-center"
+                textClassName="text-3xl sm:text-4xl md:text-5xl lg:text-[4rem] xl:text-[4.5rem] font-geometric text-[#F5F5ED] leading-[1.2] tracking-tighter"
+              >
+                <div data-layout className="w-full max-w-[90vw] md:max-w-7xl flex flex-col items-center gap-6 md:gap-4 mt-8 md:mt-0">
+                  <div data-layout className="w-full flex flex-col md:flex-row items-center justify-between gap-6 md:gap-8">
+                    {/* Left */}
+                    <div data-layout className="flex-1 flex flex-col items-center md:items-end text-center md:text-right whitespace-normal md:whitespace-nowrap">
+                      <span data-layout className="block">Nilai dirimu tidak</span>
+                      <span data-layout className="block">diukur</span>
+                    </div>
 
-            {/* Scroll Reveal Section */}
-            <section className="reveal-section absolute inset-0 w-full h-full flex flex-col items-center justify-center bg-pine-teal z-[4]">
-              <div className="max-w-6xl mx-auto px-6 text-center w-full">
-                <ScrollReveal
-                  baseOpacity={0.1}
-                  enableBlur
-                  baseRotation={3}
-                  blurStrength={4}
-                  containerClassName="text-center w-full"
-                  textClassName="text-4xl sm:text-5xl md:text-6xl lg:text-[5rem] font-bold font-geometric text-[#f3f4ea] leading-tight"
-                >
-                  Nilai dirimu tidak diukur dari sejauh mana mereka memujimu, apalagi menghakimi.
-                </ScrollReveal>
+                    {/* Center: GIF */}
+                    <img
+                      src={stressGif.src}
+                      alt="Stress Indicator"
+                      className="w-[70vw] md:w-[35vw] max-w-[450px] object-cover mix-blend-screen opacity-95 shrink-0 my-4 md:my-0"
+                    />
+
+                    {/* Right */}
+                    <div data-layout className="flex-1 flex flex-col items-center md:items-start text-center md:text-left whitespace-normal md:whitespace-nowrap">
+                      <span data-layout className="block">dari sejauh mana mereka</span>
+                      <span data-layout className="block">memujimu,</span>
+                    </div>
+                  </div>
+
+                  {/* Bottom */}
+                  <div data-layout className="w-full text-center -mt-16 md:-mt-[9rem] relative z-10 pointer-events-none">
+                    <span data-layout className="block font-medium drop-shadow-xl">apalagi menghakimi.</span>
+                  </div>
+                </div>
+              </ScrollReveal>
+            </div>
+          </section>
+
+          <section className="panel-1 absolute inset-0 w-full h-full flex flex-col items-center justify-center bg-[#F5F5ED] text-pine-teal overflow-hidden shadow-[-20px_0_40px_rgba(0,0,0,0.15)] px-6 z-[5]">
+            <div className="absolute inset-0 opacity-30 pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }}></div>
+
+            <div className="absolute left-[20vw] top-[70vh] -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none skater-dummy-img opacity-0 block">
+              <img src={dummySkater.src} className="w-[320px] md:w-[450px] lg:w-[500px] object-contain drop-shadow-2xl mix-blend-multiply opacity-90" alt="Skater" />
+              {/* Scribble behind dummy skater */}
+              <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] -z-10 text-pine-teal opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M10,50 Q20,10 50,20 T90,50 Q80,90 50,80 T10,50 Z" />
+                <path d="M20,60 Q40,20 60,60 T80,40" strokeWidth="4" opacity="0.5" />
+              </svg>
+            </div>
+
+            <h2 className="text-5xl md:text-6xl lg:text-[7rem] text-center leading-[1.1] tracking-tighter max-w-6xl z-10 font-geometric split-text-target text-blush-pop drop-shadow-sm">
+              Mengapa remaja <br />
+              <span className="text-blush-pop relative inline-block z-10 px-2 font-light">
+                cemas?
+              </span>
+            </h2>
+
+            <div className="mt-8 flex flex-col items-center justify-center text-blush-pop z-10 relative w-full">
+              {/* SVG Background */}
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[60%] w-[90vw] md:w-[60vw] lg:w-[45vw] max-w-2xl -z-10 pointer-events-none opacity-90 flex justify-center items-center mix-blend-multiply">
+                <img src={burnoutSvg.src} alt="Jangan biarkan burnout" className="w-full h-auto drop-shadow-sm opacity-60" />
               </div>
-            </section>
 
-            {/* Panel 1 (Comes in from Right) */}
-            <section className="panel-1 absolute inset-0 w-full h-full flex flex-col items-center justify-center bg-[#f3f4ea] text-pine-teal overflow-hidden shadow-[-20px_0_40px_rgba(0,0,0,0.15)] px-6 z-[5]" style={{ clipPath: 'url(#torn-edge-left)' }}>
-              <div className="absolute inset-0 opacity-[0.6] mix-blend-multiply pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/black-paper.png")' }}></div>
-              <div className="absolute inset-0 opacity-40 mix-blend-overlay pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/stardust.png")' }}></div>
-              
-              <div className="absolute left-[20vw] top-[70vh] -translate-x-1/2 -translate-y-1/2 z-50 pointer-events-none skater-dummy-img opacity-0 block">
-                <img src={dummySkater.src} className="w-[320px] md:w-[450px] lg:w-[500px] object-contain drop-shadow-2xl mix-blend-multiply opacity-90" alt="Skater" />
-                {/* Scribble behind dummy skater */}
-                <svg className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] -z-10 text-pine-teal opacity-20" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M10,50 Q20,10 50,20 T90,50 Q80,90 50,80 T10,50 Z" />
-                  <path d="M20,60 Q40,20 60,60 T80,40" strokeWidth="4" opacity="0.5" />
-                </svg>
-              </div>
-              
-              <h2 className="text-4xl md:text-6xl lg:text-[7rem] font-black text-center uppercase leading-[1.1] tracking-tighter max-w-6xl z-10 font-geometric split-text-target text-pine-teal" style={{ filter: 'url(#ink-bleed)' }}>
-                Mengapa remaja <br />
-                <span className="text-blush-pop relative inline-block z-10 px-4">
-                  Cemas?
-                  {/* Brush stroke behind Cemas? */}
-                  <svg className="absolute inset-0 w-full h-full -z-10 text-pine-teal scale-125" viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <path d="M0,45 Q25,25 50,35 T100,30 L100,70 Q75,85 50,75 T0,65 Z" fill="currentColor" opacity="0.15"/>
-                  </svg>
-                </span>
-              </h2>
-              
-              <div className="mt-12 flex flex-col items-center justify-center text-pine-teal z-10 relative">
-                <div className="text-[12rem] lg:text-[18rem] font-black leading-none font-geometric tracking-tighter" style={{ filter: 'url(#ink-bleed)' }}><span ref={counterRef}>0</span>%</div>
-                
-                {/* Splatter under the percentage */}
-                <svg className="absolute inset-0 w-full h-full -z-10 text-blush-pop opacity-30 transform -translate-y-12 scale-150 pointer-events-none" viewBox="0 0 100 100" fill="currentColor">
-                  <circle cx="20" cy="20" r="15" opacity="0.4"/>
-                  <circle cx="80" cy="40" r="20" opacity="0.6"/>
-                  <path d="M30,80 Q45,60 60,90 T90,70" stroke="currentColor" strokeWidth="4" fill="none"/>
-                </svg>
+              <div className="text-[10rem] md:text-[14rem] lg:text-[18rem] font-light leading-[0.8] font-geometric tracking-tighter drop-shadow-sm mt-4"><span ref={counterRef}>0</span>%</div>
 
-                <p className="text-xl md:text-2xl font-bold uppercase tracking-widest mt-0 text-blush-pop font-geometric text-center max-w-lg">Remaja Mengalami Cyberbullying di Sosial Media</p>
-              </div>
-            </section>
-
-          </div>
+              <p className="text-xl md:text-2xl tracking-widest mt-8 md:mt-12 text-pine-teal font-geometric text-center max-w-lg font-light">Remaja mengalami cyberbullying di sosial media</p>
+            </div>
+          </section>
         </div>
-
-
         {/* ── UNTOLD ACTUAL SECTION 2 (SHRINKING FULL-VIEWPORT VIDEO) ── */}
         <section
           ref={videoSectionRef}
-          className="w-full h-screen bg-[#e8e9de] relative overflow-hidden flex items-center justify-center cursor-none"
+          className="w-full h-screen bg-[#e8e9de] relative overflow-hidden flex items-center justify-center"
           onMouseEnter={() => setIsHoveringVideo(true)}
           onMouseLeave={() => setIsHoveringVideo(false)}
           onMouseMove={handleVideoMouseMove}
           onClick={toggleMute}
         >
           <motion.div
-            className="fixed top-0 left-0 w-24 h-24 bg-[#FF4500] rounded-full flex items-center justify-center text-white text-xs font-bold tracking-widest pointer-events-none z-[100] mix-blend-normal"
+            id="unmute-cursor"
+            className="fixed top-0 left-0 w-24 h-24 bg-blush-pop shadow-xl rounded-full flex items-center justify-center text-[#1A1A1A] font-bold text-xs tracking-widest pointer-events-none z-[100] mix-blend-normal"
             animate={{
               x: cursorPos.x - 48,
               y: cursorPos.y - 48,
@@ -743,17 +812,16 @@ export default function ContentPage() {
           >
             <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none mix-blend-multiply transition-opacity duration-700"></div>
 
-            <video
-              ref={videoRef}
-              className="w-full h-full object-cover"
-              src="https://www.w3schools.com/html/mov_bbb.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
+            <iframe
+              id="yt-player"
+              className="border-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              src="https://www.youtube.com/embed/dtNgX56fXck?autoplay=1&mute=1&loop=1&playlist=dtNgX56fXck&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1&enablejsapi=1&origin=http://localhost:3000"
+              allow="autoplay; fullscreen"
+              allowFullScreen
+              style={{ width: '120vw', height: '120vh', pointerEvents: 'none' }}
             />
 
-            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/80 text-[10px] md:text-sm font-bold tracking-[0.2em] uppercase z-20 font-geometric transition-opacity duration-300">
+            <div className="absolute bottom-12 left-1/2 -translate-x-1/2 text-white/80 text-[10px] md:text-sm tracking-[0.2em] uppercase z-20 font-geometric transition-opacity duration-300">
               ( MENGAMBIL JEDA )
             </div>
           </div>
@@ -763,17 +831,17 @@ export default function ContentPage() {
             ref={videoTextRef}
             className="absolute inset-0 flex flex-col items-start justify-center z-30 opacity-0 px-[6vw] md:px-[8vw]"
           >
-            <p className="text-sm md:text-base font-bold tracking-[0.25em] uppercase text-[#1A1A1A]/40 mb-8 font-geometric">
+            <p className="text-sm md:text-base tracking-[0.25em] uppercase text-[#1A1A1A]/40 mb-8 font-geometric">
               ( Detoks Digital )
             </p>
 
-            <h3 className="text-[2.8rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6.5rem] font-black text-[#1A1A1A] leading-[1.1] mb-10 font-geometric w-full">
-              Disconnect{' '}
+            <h3 className="text-[2.8rem] sm:text-[3.5rem] md:text-[4.5rem] lg:text-[5.5rem] xl:text-[6.5rem] text-[#1A1A1A] leading-[1.1] mb-10 font-geometric w-full">
+              <span className="font-black mix-blend-multiply flex-shrink-0" style={{ filter: 'url(#ink-bleed)' }}>Disconnect</span>{' '}
               <span className="inline-flex items-center gap-1 align-middle">
                 <span className="text-[#1A1A1A]/30 font-light">(</span>
                 <span
                   ref={placeholderRef}
-                  className="inline-block w-[130px] sm:w-[170px] md:w-[220px] lg:w-[280px] xl:w-[340px] h-[75px] sm:h-[95px] md:h-[120px] lg:h-[150px] xl:h-[180px] align-middle rounded-2xl bg-[#1A1A1A]/5"
+                  className="inline-block w-[130px] sm:w-[170px] md:w-[220px] lg:w-[280px] xl:w-[340px] h-[75px] sm:h-[95px] md:h-[120px] lg:h-[150px] xl:h-[180px] align-middle rounded-2xl bg-transparent"
                   aria-hidden="true"
                 />
                 <span className="text-[#1A1A1A]/30 font-light">)</span>
@@ -783,15 +851,40 @@ export default function ContentPage() {
 
             <div className="w-20 h-[2px] bg-[#1A1A1A]/15 mb-6" />
 
-            <p className="text-lg md:text-xl lg:text-2xl text-[#1A1A1A]/55 font-medium leading-[1.6] max-w-2xl font-geometric text-left">
+            <p className="text-lg md:text-xl lg:text-2xl text-[#1A1A1A]/55 leading-[1.6] max-w-2xl font-geometric text-left">
               Menjauh dari layar dan notifikasi beracun adalah bentuk perlindungan diri. Berani melepaskan ikatan pada standar dunia maya akan membebaskan batasan pikiranmu.
             </p>
+
+            <div
+              className="absolute bottom-10 right-[6vw] md:bottom-16 md:right-[8vw] group/button w-fit cursor-pointer outline-none z-50"
+              onClick={() => {
+                const st = ScrollTrigger.getById('video-trigger');
+                if (st) {
+                  window.scrollTo({ top: st.start, behavior: 'smooth' });
+                } else {
+                  videoSectionRef.current?.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+            >
+              <div className="flex items-center gap-4 md:gap-6">
+                <p className="text-sm md:text-lg font-black font-geometric uppercase tracking-widest text-[#1A1A1A] group-hover/button:text-blush-pop transition-colors duration-500 delay-75">
+                  Nonton lagi
+                </p>
+                <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full border border-blush-pop group-hover/button:bg-blush-pop transition-all duration-300 relative overflow-hidden group-hover/button:scale-105 group-hover/button:border-transparent">
+                  <svg className="w-4 h-4 md:w-4 md:h-4 text-blush-pop group-hover/button:text-[#1A1A1A] transition-colors duration-300 -rotate-90 group-hover/button:rotate-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2.5">
+                    <path strokeLinecap="round" strokeLinejoin="miter" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
+                </div>
+              </div>
+              <div className="absolute -bottom-3 left-0 h-[2px] w-[calc(100%-3rem)] md:w-[calc(100%-4rem)] bg-blush-pop origin-right scale-x-100 group-hover/button:scale-x-0 transition-transform duration-500 ease-[cubic-bezier(0.87,0,0.13,1)]"></div>
+              <div className="absolute -bottom-3 left-0 h-[2px] w-[calc(100%-3rem)] md:w-[calc(100%-4rem)] bg-[#1A1A1A] origin-left scale-x-0 group-hover/button:scale-x-100 transition-transform duration-500 delay-[0.15s] ease-[cubic-bezier(0.87,0,0.13,1)]"></div>
+            </div>
           </div>
 
         </section>
 
         {/* ── PIXELFLAKES PRE-FOOTER SECTION (PENGALAMAN) ── */}
-        <section ref={pfSectionRef} className="w-full h-screen bg-[#E0DDD5] relative overflow-hidden z-20">
+        <section ref={pfSectionRef} className="w-full h-screen bg-[#F5F5ED] relative overflow-hidden z-20">
           <ImageMouseTrail items={images} maxNumberOfImages={5} fadeAnimation={true} distance={40} imgClass="w-32 md:w-48 h-40 md:h-60 rounded-2xl shadow-2xl">
             <div className="w-full h-screen flex flex-col items-center justify-center relative">
 
@@ -811,35 +904,20 @@ export default function ContentPage() {
               </div>
 
               <div className="max-w-6xl mx-auto w-full relative z-20 mb-16 px-4 md:px-12 pointer-events-none select-none">
-                <div className="pf-text-wrapper w-full max-w-5xl mx-auto text-center font-bold font-geometric leading-[1.1] text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4rem] tracking-tight mix-blend-normal" style={{ color: '#1A1A1A' }}>
+                <div className="pf-text-wrapper w-full max-w-5xl mx-auto text-center font-geometric leading-[1.1] text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] xl:text-[4rem] tracking-tight mix-blend-normal" style={{ color: '#1A1A1A' }}>
                   <div className="block"><TypingText text="Mari kita dengar kisah" delay={100} duration={30} loop={false} inView={true} inViewOnce={false} inViewMargin="-10%" className="inline-block" /></div>
                   <div className="block"><TypingText text="Mereka yang berhasil" delay={1000} duration={30} loop={false} inView={true} inViewOnce={false} inViewMargin="-10%" className="inline-block" /></div>
                   <div className="flex flex-wrap items-center justify-center gap-[0.3em] my-1">
                     <TypingText text="menembus" delay={1800} duration={30} loop={false} inView={true} inViewOnce={false} inViewMargin="-10%" className="inline-block" />
-                    <HighlightText text="penjara" delay={2300} className="px-[0.3em] pb-[0.05em] pt-[0.1em] font-black text-[#1A1A1A] rounded-[0.25em]" style={{ backgroundImage: 'linear-gradient(to right, #8DDEDE, #8DDEDE)' }} />
+                    <HighlightText text="penjara" delay={2300} className="px-[0.3em] pb-[0.05em] pt-[0.1em] font-black font-geometric text-[#1A1A1A] rounded-[0.25em]" style={{ backgroundImage: 'linear-gradient(to right, #F5F5ED, #F5F5ED)' }} />
                   </div>
                   <div className="block"><TypingText text="digital dan menemukan" delay={2600} duration={30} loop={false} inView={true} inViewOnce={false} inViewMargin="-10%" className="inline-block" /></div>
                   <div className="block"><TypingText text="kembali suaranya." delay={3400} duration={30} loop={false} inView={true} inViewOnce={false} inViewMargin="-10%" className="inline-block" /></div>
                 </div>
               </div>
 
-              <div className="pf-text-wrapper absolute bottom-8 right-8 md:bottom-12 md:right-12 text-sm md:text-base font-geometric leading-relaxed max-w-sm text-right pointer-events-auto z-40 font-medium transition-colors duration-700" style={{ color: '#1A1A2A' }}>
-                <span className="text-blush-pop font-black mr-2">(*)</span>
-                Kami hadir untuk membantu kamu{' '}
-                <RotatingTextContainer
-                  text={['mematikan', 'mereset', 'menyembuhkan']}
-                  duration={1800}
-                  delay={500}
-                  y={20}
-                  className="inline-flex items-center mx-1 font-bold underline decoration-blush-pop decoration-2 underline-offset-4 pf-text-wrapper transition-colors duration-700"
-                  style={{ overflow: 'hidden', paddingBlock: 0, minWidth: '6em', display: 'inline-block', color: 'inherit' }}
-                >
-                  <RotatingText
-                    className="font-black"
-                    transition={{ duration: 0.35, ease: 'easeOut' }}
-                  />
-                </RotatingTextContainer>{' '}
-                kesehatan mental berdamai dengan dunia nyata.
+              <div className="pf-text-wrapper absolute bottom-8 right-8 md:bottom-12 md:right-12 text-sm md:text-base font-tt-commons-light uppercase tracking-[0.2em] text-right pointer-events-none z-40 transition-colors duration-700 opacity-60" style={{ color: '#1A1A2A' }}>
+                Playing cursor to reveal
               </div>
 
               <div className="pf-media-container absolute bottom-0 left-1/2 -translate-x-1/2 w-[60vw] md:w-[25vw] h-[15vh] md:h-[20vh] bg-pine-teal rounded-t-[2rem] md:rounded-t-[3rem] overflow-hidden flex items-center justify-center shadow-2xl opacity-80 z-30 hidden pointer-events-auto">
@@ -855,8 +933,8 @@ export default function ContentPage() {
         <StackingCards images={images} />
 
         {/* ── SECTION BERIKUTNYA SEPERTI HERO (PUTIH/BEIGE) ── */}
-        <section className="w-full h-screen bg-[#f3f4ea] relative z-10 flex flex-col items-center justify-center border-t border-pine-teal/20">
-          <h2 className="text-3xl md:text-5xl font-geometric font-black text-pine-teal">FOOTER / NEXT SECTION</h2>
+        <section className="w-full h-screen bg-[#F5F5ED] relative z-10 flex flex-col items-center justify-center border-t border-pine-teal/20">
+          <h2 className="text-3xl md:text-5xl font-geometric text-pine-teal">FOOTER / NEXT SECTION</h2>
         </section>
 
       </main>

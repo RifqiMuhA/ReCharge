@@ -1,0 +1,152 @@
+
+> temp@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.35
+
+   Creating an optimized production build ...
+ ⚠ Found lockfile missing swc dependencies, patching...
+ ⚠ Found lockfile missing swc dependencies, patching...
+ ⚠ Found lockfile missing swc dependencies, patching...
+Failed to compile.
+
+./app/globals.css.webpack[javascript/auto]!=!./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[3]!./app/globals.css
+SyntaxError: Unexpected token, expected "," (16:3)
+    at unexpected (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:99:15)
+    at expect (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:86:5)
+    at parseObj (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:759:20)
+    at parseExprAtom (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:553:7)
+    at parseExprSubscripts (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:276:20)
+    at parseMaybeUnary (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:257:20)
+    at parseExprOps (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:185:20)
+    at parseMaybeConditional (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:157:20)
+    at baseParseMaybeAssign (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:142:20)
+    at tsParseMaybeAssignWithoutJSX (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\plugins\typescript.js:1580:45)
+
+Import trace for requested module:
+./app/globals.css.webpack[javascript/auto]!=!./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[3]!./app/globals.css
+./app/globals.css
+
+./components/ScrollReveal.css.webpack[javascript/auto]!=!./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[3]!./components/ScrollReveal.css
+SyntaxError: Unexpected token, expected "," (16:3)
+    at unexpected (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:99:15)
+    at expect (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:86:5)
+    at parseObj (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:759:20)
+    at parseExprAtom (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:553:7)
+    at parseExprSubscripts (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:276:20)
+    at parseMaybeUnary (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:257:20)
+    at parseExprOps (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:185:20)
+    at parseMaybeConditional (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:157:20)
+    at baseParseMaybeAssign (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:142:20)
+    at tsParseMaybeAssignWithoutJSX (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\plugins\typescript.js:1580:45)
+
+Import trace for requested module:
+./components/ScrollReveal.css.webpack[javascript/auto]!=!./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[12].use[3]!./components/ScrollReveal.css
+./components/ScrollReveal.css
+./components/ScrollReveal.tsx
+./app/content/page.tsx
+
+./app/globals.css
+SyntaxError: Unexpected token, expected "," (16:3)
+    at unexpected (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:99:15)
+    at expect (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:86:5)
+    at parseObj (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:759:20)
+    at parseExprAtom (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:553:7)
+    at parseExprSubscripts (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:276:20)
+    at parseMaybeUnary (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:257:20)
+    at parseExprOps (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:185:20)
+    at parseMaybeConditional (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:157:20)
+    at baseParseMaybeAssign (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:142:20)
+    at tsParseMaybeAssignWithoutJSX (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\plugins\typescript.js:1580:45)
+    at tryRunOrWebpackError (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:312989)
+    at __webpack_require_module__ (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:131165)
+    at __nested_webpack_require_153728__ (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:130607)
+    at D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:131454
+    at symbolIterator (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\neo-async\async.js:1:14444)
+    at done (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\neo-async\async.js:1:14824)
+    at Hook.eval [as callAsync] (eval at create (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:13:28858), <anonymous>:15:1)
+    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:13:26012)
+    at D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:130328
+    at symbolIterator (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\neo-async\async.js:1:14402)
+-- inner error --
+SyntaxError: Unexpected token, expected "," (16:3)
+    at unexpected (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:99:15)
+    at expect (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:86:5)
+    at parseObj (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:759:20)
+    at parseExprAtom (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:553:7)
+    at parseExprSubscripts (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:276:20)
+    at parseMaybeUnary (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:257:20)
+    at parseExprOps (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:185:20)
+    at parseMaybeConditional (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:157:20)
+    at baseParseMaybeAssign (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:142:20)
+    at tsParseMaybeAssignWithoutJSX (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\plugins\typescript.js:1580:45)
+    at Object.<anonymous> (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[2]!D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[3]!D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\app\globals.css:1:7)
+    at D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:922493
+    at Hook.eval [as call] (eval at create (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:13:28636), <anonymous>:7:1)
+    at Hook.CALL_DELEGATE [as _call] (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:13:25906)
+    at D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:131198
+    at tryRunOrWebpackError (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:312943)
+    at __webpack_require_module__ (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:131165)
+    at __nested_webpack_require_153728__ (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:130607)
+    at D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:131454
+    at symbolIterator (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\neo-async\async.js:1:14444)
+
+Generated code for D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[2]!D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[3]!D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\app\globals.css
+
+Import trace for requested module:
+./app/globals.css
+
+./components/ScrollReveal.css
+SyntaxError: Unexpected token, expected "," (16:3)
+    at unexpected (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:99:15)
+    at expect (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:86:5)
+    at parseObj (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:759:20)
+    at parseExprAtom (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:553:7)
+    at parseExprSubscripts (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:276:20)
+    at parseMaybeUnary (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:257:20)
+    at parseExprOps (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:185:20)
+    at parseMaybeConditional (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:157:20)
+    at baseParseMaybeAssign (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:142:20)
+    at tsParseMaybeAssignWithoutJSX (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\plugins\typescript.js:1580:45)
+    at tryRunOrWebpackError (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:312989)
+    at __webpack_require_module__ (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:131165)
+    at __nested_webpack_require_153728__ (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:130607)
+    at D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:131454
+    at symbolIterator (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\neo-async\async.js:1:14444)
+    at done (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\neo-async\async.js:1:14824)
+    at Hook.eval [as callAsync] (eval at create (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:13:28858), <anonymous>:15:1)
+    at D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:130328
+    at symbolIterator (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\neo-async\async.js:1:14402)
+    at timesSync (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\neo-async\async.js:1:5027)
+-- inner error --
+SyntaxError: Unexpected token, expected "," (16:3)
+    at unexpected (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:99:15)
+    at expect (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\util.js:86:5)
+    at parseObj (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:759:20)
+    at parseExprAtom (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:553:7)
+    at parseExprSubscripts (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:276:20)
+    at parseMaybeUnary (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:257:20)
+    at parseExprOps (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:185:20)
+    at parseMaybeConditional (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:157:20)
+    at baseParseMaybeAssign (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\traverser\expression.js:142:20)
+    at tsParseMaybeAssignWithoutJSX (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\sucrase\dist\parser\plugins\typescript.js:1580:45)
+    at Object.<anonymous> (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[2]!D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[3]!D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\components\ScrollReveal.css:1:7)
+    at D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:922493
+    at Hook.eval [as call] (eval at create (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:13:28636), <anonymous>:7:1)
+    at D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:131198
+    at tryRunOrWebpackError (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:312943)
+    at __webpack_require_module__ (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:131165)
+    at __nested_webpack_require_153728__ (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:130607)
+    at D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\webpack\bundle5.js:28:131454
+    at symbolIterator (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\neo-async\async.js:1:14444)
+    at done (D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\compiled\neo-async\async.js:1:14824)
+
+Generated code for D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[2]!D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[3]!D:\STIS SEM 6\LOMBA WEB DESIGN\DRAFT\ReCharge\components\ScrollReveal.css
+
+Import trace for requested module:
+./components/ScrollReveal.css
+./components/ScrollReveal.tsx
+./app/content/page.tsx
+
+
+> Build failed because of webpack errors

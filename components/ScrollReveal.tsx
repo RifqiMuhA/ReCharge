@@ -30,18 +30,44 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   rotationEnd = 'bottom bottom',
   wordAnimationEnd = 'bottom bottom'
 }) => {
-  const containerRef = useRef<HTMLHeadingElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const splitText = useMemo(() => {
-    const text = typeof children === 'string' ? children : '';
-    return text.split(/(\s+)/).map((word, index) => {
-      if (word.match(/^\s+$/)) return word;
-      return (
-        <span className="word" key={index}>
-          {word}
-        </span>
-      );
-    });
+    let globalWordIndex = 0;
+    const processString = (str: string) => {
+      return str.split(/(\s+)/).map((word) => {
+        if (word.match(/^\s+$/)) return word;
+        globalWordIndex++;
+        return (
+          <span className="word inline-block" key={`w-${globalWordIndex}`}>
+            {word}
+          </span>
+        );
+      });
+    };
+
+    const processChild = (child: ReactNode): any => {
+      if (typeof child === 'string' || typeof child === 'number') {
+        return processString(String(child));
+      }
+      if (React.isValidElement(child)) {
+        globalWordIndex++;
+        if (child.type === 'br') {
+          return React.cloneElement(child as React.ReactElement, { key: `br-${globalWordIndex}` });
+        }
+        return (
+          <span className="word inline-block align-middle mx-1 md:mx-3" key={`e-${globalWordIndex}`}>
+            {child}
+          </span>
+        );
+      }
+      if (Array.isArray(child)) {
+        return child.flatMap(c => processChild(c));
+      }
+      return child;
+    };
+
+    return processChild(children);
   }, [children]);
 
   useEffect(() => {
@@ -110,9 +136,9 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
   }, [scrollContainerRef, enableBlur, baseRotation, baseOpacity, rotationEnd, wordAnimationEnd, blurStrength]);
 
   return (
-    <h2 ref={containerRef} className={`scroll-reveal ${containerClassName}`}>
-      <p className={`scroll-reveal-text ${textClassName}`}>{splitText}</p>
-    </h2>
+    <div ref={containerRef} className={`scroll-reveal ${containerClassName}`}>
+      <div className={`scroll-reveal-text ${textClassName}`}>{splitText}</div>
+    </div>
   );
 };
 
