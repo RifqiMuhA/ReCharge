@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import TextType from '@/components/ui/text-type';
 import Noise from '@/components/ui/noise';
+import SequencePreloader from './SequencePreloader';
 
 const FRAME_COUNT = 192;
 /*
@@ -239,6 +240,16 @@ export default function SequenceScroll() {
   }, [images, currentFrameIndex]);
 
   // Overlays and Effects
+  const [minTimeElapsed, setMinTimeElapsed] = useState(false);
+  useEffect(() => {
+    // Artificial minimum delay to ensure the luxurious loader is visible even if cached or on fast localhost
+    const timer = setTimeout(() => {
+      setMinTimeElapsed(true);
+    }, 2800); // Tahan loader minimal 2.8 detik agar animasinya memukau
+    return () => clearTimeout(timer);
+  }, []);
+
+  const isLoaded = loadedCount >= Math.min(FRAME_COUNT, 30) && minTimeElapsed; // Wait for both frames & time
 
   // Track when text area is scrolled into view to trigger typing
   const [showTyping, setShowTyping] = useState(false);
@@ -262,6 +273,7 @@ export default function SequenceScroll() {
 
   return (
     <div ref={containerRef} className="relative h-[500vh] bg-floral-white">
+      <SequencePreloader isLoaded={isLoaded} loadedCount={loadedCount} totalFrames={FRAME_COUNT} />
 
       {/* Sticky Canvas Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden bg-floral-white grain-overlay flex flex-col items-center justify-center">

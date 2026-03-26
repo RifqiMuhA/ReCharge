@@ -27,7 +27,7 @@ export default function CtaSection() {
       >
         {/* Cursor trail */}
         <div className="absolute inset-0 z-[5]">
-          <CursorTrail color="rgba(21, 34, 27, 0.25)" size={200} blur={40} />
+          <CursorTrail size={200} blur={40} />
         </div>
 
         {/* Noise texture overlay */}

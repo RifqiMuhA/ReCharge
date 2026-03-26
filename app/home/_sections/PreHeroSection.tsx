@@ -105,7 +105,7 @@ export default function PreHeroSection() {
         }}
         className="sticky top-0 h-screen w-full bg-floral-white overflow-hidden flex flex-col shadow-2xl origin-top"
       >
-        <CursorTrail color="rgba(255, 171, 210, 0.2)" size={180} blur={40} />
+        <CursorTrail size={180} blur={40} />
 
         {/* ── hias1 — bunga+kotak hijau, pojok kanan atas ── */}
         <div className="absolute right-[1%] md:right-[20%] top-[4%] md:top-[10%] z-[6] pointer-events-none">
