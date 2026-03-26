@@ -12,7 +12,6 @@
     "@gsap/react": "^2.1.2",
     "@lottiefiles/react-lottie-player": "^3.6.0",
     "@motionone/utils": "^10.18.0",
-    "@next/swc-win32-x64-msvc": "^16.2.1",
     "@studio-freight/react-lenis": "^0.0.47",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
