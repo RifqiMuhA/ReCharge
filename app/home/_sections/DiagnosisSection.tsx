@@ -59,7 +59,6 @@ function DimensionCard({
   quote,
   source,
   colorStr,
-  Icon,
 }: {
   num: string;
   title: React.ReactNode;
@@ -67,26 +66,15 @@ function DimensionCard({
   quote: string;
   source: string;
   colorStr: string;
-  Icon: React.ElementType;
 }) {
   return (
-    <div className="relative bg-white/95 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-pine-teal/10 overflow-hidden group hover:border-pine-teal/20 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] flex flex-col md:flex-row gap-8 items-start md:items-center">
+    <div className="relative bg-white/95 backdrop-blur-md rounded-3xl p-8 md:p-12 border border-pine-teal/10 overflow-hidden group hover:border-pine-teal/20 transition-all duration-300 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] flex flex-col gap-6 items-start justify-center min-h-[300px]">
       {/* Large faint background number */}
       <div className="absolute top-0 right-4 text-[120px] md:text-[180px] font-tt-commons font-bold text-pine-teal/5 select-none pointer-events-none leading-none z-0 transition-transform duration-500 group-hover:scale-105 group-hover:text-pine-teal/10">
         {num}
       </div>
 
-      <div className="relative z-10 shrink-0">
-        {/* Icon Circle */}
-        <div
-          className="w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center"
-          style={{ backgroundColor: colorStr }}
-        >
-          <Icon className="text-pine-teal/70 w-8 h-8 md:w-10 md:h-10" />
-        </div>
-      </div>
-
-      <div className="relative z-10 flex-grow pt-2 md:pt-0">
+      <div className="relative z-10 flex-grow pt-2 md:pt-0 w-full">
         {/* Text Content */}
         <h3 className="font-tt-commons font-bold text-2xl md:text-3xl text-pine-teal lowercase mb-3 md:mb-4">
           {title}
@@ -124,7 +112,6 @@ export default function DiagnosisSection() {
       quote: 'Burnout is not a problem to be solved, it is a response to be understood — a signal that something in the environment needs to change.',
       source: 'Christina Maslach, Ph.D., UC Berkeley · Maslach Burnout Inventory',
       colorStr: 'rgba(255,171,210,0.25)', // blush-pop
-      icon: IconBatteryEmpty,
     },
     {
       num: '02',
@@ -133,7 +120,6 @@ export default function DiagnosisSection() {
       quote: 'Cynicism is the mind\'s way of protecting itself from further disappointment. It is exhaustion wearing a mask of indifference.',
       source: 'Christina Maslach, Ph.D. · "Burnout: The Cost of Caring"',
       colorStr: 'rgba(141,222,222,0.25)', // pearl-aqua
-      icon: IconShieldCross,
     },
     {
       num: '03',
@@ -142,7 +128,6 @@ export default function DiagnosisSection() {
       quote: 'Our devices make it nearly impossible to disconnect, and that constant connectivity is taking a real toll on mental health.',
       source: 'Sharon Claffey, Ph.D., Psikolog Klinis',
       colorStr: 'rgba(255,249,70,0.25)', // canary-yellow
-      icon: IconPauseCircle,
     },
     {
       num: '04',
@@ -151,7 +136,6 @@ export default function DiagnosisSection() {
       quote: 'Social media enables effortless upward comparison — we see curated highlights and measure ourselves against an impossible standard.',
       source: 'Sharon Claffey, Ph.D., Psikolog Klinis',
       colorStr: 'rgba(255,171,210,0.25)', // blush-pop
-      icon: IconEyeFocus,
     },
     {
       num: '05',
@@ -160,7 +144,6 @@ export default function DiagnosisSection() {
       quote: 'Reduced personal accomplishment is not about failing — it is about succeeding and still feeling like it is never enough.',
       source: 'Christina Maslach, Ph.D. · Maslach Burnout Inventory, Dimensi Ketiga',
       colorStr: 'rgba(141,222,222,0.25)', // pearl-aqua
-      icon: IconTrophyEmpty,
     },
   ];
 
@@ -211,7 +194,6 @@ export default function DiagnosisSection() {
                     quote={dim.quote}
                     source={dim.source}
                     colorStr={dim.colorStr}
-                    Icon={dim.icon}
                   />
                 </div>
               </ScrollStackItem>
