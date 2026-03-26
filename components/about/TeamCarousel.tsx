@@ -74,6 +74,7 @@ export default function TeamCarousel({ isOpen, onClose, members, initialIndex = 
                 transition={{ duration: 0.5, ease: 'easeOut' }}
                 className="w-full md:w-[45%] h-[45%] md:h-full relative shrink-0"
               >
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
                  <img src={members[currentIndex].image} alt={members[currentIndex].name} className="w-full h-full object-cover grayscale mix-blend-multiply" />
               </motion.div>
             </AnimatePresence>
@@ -96,7 +97,7 @@ export default function TeamCarousel({ isOpen, onClose, members, initialIndex = 
                 
                 <div className="mb-8">
                   <p className="text-lg md:text-2xl font-light italic leading-relaxed border-l-4 border-pine-teal pl-4 opacity-80">
-                    "{members[currentIndex].monologue}"
+                    &ldquo;{members[currentIndex].monologue}&rdquo;
                   </p>
                 </div>
 

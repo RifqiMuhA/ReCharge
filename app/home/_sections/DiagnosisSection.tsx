@@ -86,7 +86,7 @@ function DimensionCard({
         {/* Quote Section */}
         <div className="pl-4 border-l-2 border-pine-teal/20 relative">
           <p className="font-geometric italic text-sm md:text-base text-pine-teal/60 mb-2">
-            "{quote}"
+            &ldquo;{quote}&rdquo;
           </p>
           <span className="font-tt-commons font-semibold text-xs md:text-xs text-pine-teal/40 uppercase tracking-wider">
             {source}

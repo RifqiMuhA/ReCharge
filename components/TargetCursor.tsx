@@ -47,6 +47,9 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
     useEffect(() => {
         if (isMobile || !cursorRef.current) return;
 
+        // Capture ref value for cleanup to satisfy react-hooks/exhaustive-deps
+        const strengthTarget = activeStrengthRef.current;
+
         const originalCursor = document.body.style.cursor;
 
         const cursor = cursorRef.current;
@@ -88,7 +91,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             if (!targetCornerPositionsRef.current || !cursorRef.current || !cornersRef.current) {
                 return;
             }
-            const strength = activeStrengthRef.current.current;
+            const strength = strengthTarget.current;
             if (strength === 0) return;
             const cursorX = gsap.getProperty(cursorRef.current, 'x') as number;
             const cursorY = gsap.getProperty(cursorRef.current, 'y') as number;
@@ -191,7 +194,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             // Fade in cursor
             gsap.to(cursorRef.current, { opacity: 1, duration: 0.2 });
 
-            gsap.to(activeStrengthRef.current, { current: 1, duration: hoverDuration, ease: 'power2.out' });
+            gsap.to(strengthTarget, { current: 1, duration: hoverDuration, ease: 'power2.out' });
 
             corners.forEach((corner, i) => {
                 gsap.to(corner, {
@@ -206,7 +209,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
                 gsap.ticker.remove(tickerFnRef.current!);
                 isActiveRef.current = false;
                 targetCornerPositionsRef.current = null;
-                gsap.set(activeStrengthRef.current, { current: 0, overwrite: true });
+                gsap.set(strengthTarget, { current: 0, overwrite: true });
                 activeTarget = null;
                 if (cornersRef.current) {
                     const corners = Array.from(cornersRef.current);
@@ -270,7 +273,7 @@ const TargetCursor: React.FC<TargetCursorProps> = ({
             document.body.style.cursor = originalCursor;
             isActiveRef.current = false;
             targetCornerPositionsRef.current = null;
-            activeStrengthRef.current.current = 0;
+            strengthTarget.current = 0;
         };
     }, [targetSelector, spinDuration, moveCursor, constants, hideDefaultCursor, isMobile, hoverDuration, parallaxOn]);
 
