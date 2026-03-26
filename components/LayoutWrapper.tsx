@@ -11,6 +11,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     return (
         <>
             {!isQuizRoute && <Navbar />}
+            <Navbar />
             <main className={`${!isQuizRoute ? 'flex-grow pt-16' : 'flex-grow w-full h-full'}`}>
                 {children}
             </main>

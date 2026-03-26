@@ -18,6 +18,7 @@ interface MapProps {
 export default function WorldMap({
     dots = [],
     lineColor = "#0ea5e9", // We will likely override this via props to match ReCharge theme
+    lineColor = "#0ea5e9",
     onDotClick,
 }: MapProps) {
     const svgRef = useRef<SVGSVGElement>(null);
@@ -30,6 +31,8 @@ export default function WorldMap({
 
     const DOT_DEFAULT = '#FFABD2';  // blush-pop pink
     const DOT_HOVER = '#15221b';    // pine-teal
+    const DOT_DEFAULT = '#FFABD2';
+    const DOT_HOVER = '#15221b';
 
     const handleHover = (dotPoint: { lat: number; lng: number; imageUrl?: string; label?: string }) => {
         if (dotPoint.imageUrl) {

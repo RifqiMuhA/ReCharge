@@ -25,6 +25,10 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 // We'll reuse birdLetter1Img as the standalone letter falling for now since there's no dedicated letter.webp
 // Alternatively, we can use a basic UI element for the letter. Let's use a subtle div styled as a letter.
 
+// We'll reuse birdLetter1Img as the standalone letter falling for now since there's no dedicated letter.webp
+// Alternatively, we can use a basic UI element for the letter. Let's use a subtle div styled as a letter.
+
+gsap.registerPlugin(ScrollTrigger);
 
 const SOCIAL_CARDS = [
     {
