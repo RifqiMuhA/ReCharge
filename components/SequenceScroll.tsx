@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import TextType from '@/components/ui/text-type';
 import Noise from '@/components/ui/noise';
@@ -23,50 +22,6 @@ type BubbleConfig = {
 };
 
 const BUBBLE_TEXTS = [
-  "you're not enough",
-  "you should be grateful",
-  "why are you like this",
-  "everyone else is fine",
-  "lazy",
-  "it's all in your head",
-  "try harder",
-  "stop being dramatic",
-  "nobody cares",
-  "just deal with it",
-  "you're overreacting",
-  "get over it",
-];
-
-const POSITIONED_BUBBLES: BubbleConfig[] = [
-  // Top row — enter from top
-  { id: 0, text: BUBBLE_TEXTS[0], top: '8%', left: '5%', rotate: -4, size: 'md', enterFrom: 'left', appearAt: 0.30 },
-  { id: 1, text: BUBBLE_TEXTS[1], top: '5%', left: '30%', rotate: 2, size: 'lg', enterFrom: 'top', appearAt: 0.35 },
-  { id: 2, text: BUBBLE_TEXTS[2], top: '3%', left: '60%', rotate: -2, size: 'sm', enterFrom: 'top', appearAt: 0.40 },
-  { id: 3, text: BUBBLE_TEXTS[3], top: '7%', left: '82%', rotate: 3, size: 'md', enterFrom: 'right', appearAt: 0.33 },
-
-  // Left side — enter from left
-  { id: 4, text: BUBBLE_TEXTS[4], top: '22%', left: '2%', rotate: 5, size: 'sm', enterFrom: 'left', appearAt: 0.38 },
-  { id: 5, text: BUBBLE_TEXTS[5], top: '40%', left: '3%', rotate: -3, size: 'lg', enterFrom: 'left', appearAt: 0.45 },
-  { id: 6, text: BUBBLE_TEXTS[6], top: '58%', left: '1%', rotate: 2, size: 'md', enterFrom: 'left', appearAt: 0.50 },
-  { id: 7, text: BUBBLE_TEXTS[7], top: '75%', left: '4%', rotate: -5, size: 'sm', enterFrom: 'left', appearAt: 0.55 },
-
-  // Right side — enter from right
-  { id: 8, text: BUBBLE_TEXTS[8], top: '20%', left: '80%', rotate: -3, size: 'md', enterFrom: 'right', appearAt: 0.36 },
-  { id: 9, text: BUBBLE_TEXTS[9], top: '38%', left: '82%', rotate: 4, size: 'sm', enterFrom: 'right', appearAt: 0.42 },
-  { id: 10, text: BUBBLE_TEXTS[10], top: '55%', left: '78%', rotate: -2, size: 'lg', enterFrom: 'right', appearAt: 0.48 },
-  { id: 11, text: BUBBLE_TEXTS[11], top: '72%', left: '83%', rotate: 3, size: 'md', enterFrom: 'right', appearAt: 0.53 },
-
-  // Bottom row — enter from bottom
-  { id: 12, text: BUBBLE_TEXTS[0], top: '85%', left: '8%', rotate: 3, size: 'sm', enterFrom: 'bottom', appearAt: 0.58 },
-  { id: 13, text: BUBBLE_TEXTS[3], top: '88%', left: '35%', rotate: -2, size: 'md', enterFrom: 'bottom', appearAt: 0.60 },
-  { id: 14, text: BUBBLE_TEXTS[6], top: '90%', left: '55%', rotate: 4, size: 'sm', enterFrom: 'bottom', appearAt: 0.62 },
-  { id: 15, text: BUBBLE_TEXTS[9], top: '86%', left: '75%', rotate: -4, size: 'lg', enterFrom: 'bottom', appearAt: 0.56 },
-
-  // Inner scattered — closer to illustration
-  { id: 16, text: BUBBLE_TEXTS[2], top: '18%', left: '20%', rotate: -6, size: 'sm', enterFrom: 'left', appearAt: 0.52 },
-  { id: 17, text: BUBBLE_TEXTS[5], top: '16%', left: '65%', rotate: 5, size: 'sm', enterFrom: 'right', appearAt: 0.54 },
-  { id: 18, text: BUBBLE_TEXTS[8], top: '65%', left: '18%', rotate: 3, size: 'sm', enterFrom: 'left', appearAt: 0.58 },
-  { id: 19, text: BUBBLE_TEXTS[11], top: '68%', left: '68%', rotate: -3, size: 'sm', enterFrom: 'right', appearAt: 0.60 },
   "kamu nggak cukup baik",        // 0
   "harusnya kamu bersyukur",      // 1
   "kenapa kamu gitu sih",         // 2
@@ -135,11 +90,6 @@ function Bubble({ bubble, scrollYProgress }: { bubble: BubbleConfig; scrollYProg
   const offsetY = dir === 'top' ? enterOffset.top : dir === 'bottom' ? enterOffset.bottom : 0;
 
   const fadeStart = bubble.appearAt;
-  const fadeIn = fadeStart + 0.03;
-  const fadeOutStart = 0.92;
-  const fadeOutEnd = 0.98;
-
-  const opacity = useTransform(scrollYProgress, [fadeStart, fadeIn, fadeOutStart, fadeOutEnd], [0, 1, 1, 0]);
   const fadeIn = fadeStart + 0.05;
   const fadeOutStart = 0.92;
   const fadeOutEnd = 0.98;
@@ -166,10 +116,6 @@ function Bubble({ bubble, scrollYProgress }: { bubble: BubbleConfig; scrollYProg
         scale,
         rotate: bubble.rotate,
       }}
-      className="pointer-events-none z-20"
-    >
-      <div
-        className={`${sizeClasses[bubble.size]} bg-floral-white/80 backdrop-blur-md text-pine-teal/90 font-tt-commons font-bold tracking-wide whitespace-nowrap shadow-sm`}
       className="pointer-events-none"
     >
       <div
@@ -293,48 +239,6 @@ export default function SequenceScroll() {
     };
   }, [images, currentFrameIndex]);
 
-  // Overlays
-  const isLoaded = loadedCount >= Math.min(FRAME_COUNT, 30); // Consider loaded when first 30 frames are ready
-
-  const opacity35 = useTransform(scrollYProgress, [0.15, 0.25, 0.45, 0.55], [0, 1, 1, 0]);
-  const y35 = useTransform(scrollYProgress, [0.15, 0.55], ['10%', '-10%']);
-
-  return (
-    <div ref={containerRef} className="relative h-[500vh] bg-floral-white">
-
-      {/* Preloader */}
-      <AnimatePresence mode="wait">
-        {!isLoaded && (
-          <motion.div
-            key="preloader"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] } }}
-            className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-floral-white"
-          >
-            <div className="overflow-hidden">
-              <motion.div
-                initial={{ y: "100%" }}
-                animate={{ y: "0%" }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                className="text-[12vw] md:text-[8vw] font-tt-commons font-bold text-pine-teal tracking-tighter mix-blend-difference leading-none"
-              >
-                {Math.round((loadedCount / FRAME_COUNT) * 100)}%
-              </motion.div>
-            </div>
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center">
-              <span className="text-pine-teal font-geometric text-sm tracking-widest uppercase mb-4 opacity-50">
-                Loading the Experience
-              </span>
-              <div className="w-64 h-1 bg-pine-teal/10 rounded-full overflow-hidden">
-                <div
-                  className="h-full bg-pine-teal rounded-full"
-                  style={{ width: `${(loadedCount / FRAME_COUNT) * 100}%` }}
-                />
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
   // Overlays and Effects
   const [minTimeElapsed, setMinTimeElapsed] = useState(false);
   useEffect(() => {
@@ -409,8 +313,6 @@ export default function SequenceScroll() {
           className="absolute inset-0 w-full h-full pointer-events-none z-10 mix-blend-multiply"
         />
 
-        {/* Antigravity Bubbles */}
-        <div className="absolute inset-0 pointer-events-none z-20 overflow-hidden">
         {/* Dark Vignette Effect (Behind Bubbles, In Front of Canvas) */}
         <motion.div
           style={{ opacity: vignetteOpacity }}
@@ -432,11 +334,6 @@ export default function SequenceScroll() {
           {/* 35% Overlay */}
           <motion.div
             style={{ opacity: opacity35, y: y35 }}
-            className="absolute inset-0 flex flex-col items-start justify-center pl-[5%] md:pl-[10%]"
-          >
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-tt-commons font-bold text-pine-teal tracking-tight drop-shadow-md">
-              It starts with<br />just one scroll.
-            </h2>
             className="absolute inset-y-0 left-0 flex flex-col items-start justify-center text-left pl-6 md:pl-16 lg:pl-28 w-full md:w-3/4"
           >
             {showTyping && (

@@ -1,101 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from 'react';
-import { gsap } from 'gsap';
-
-interface BreathingPhaseProps {
-    onComplete: () => void;
-    isDark: boolean;
-}
-
-export default function BreathingPhase({ onComplete, isDark }: BreathingPhaseProps) {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const orbRef = useRef<HTMLDivElement>(null);
-    const textRef = useRef<HTMLHeadingElement>(null);
-    const [cycleCount, setCycleCount] = useState(0);
-
-    useEffect(() => {
-        if (!orbRef.current || !textRef.current || !containerRef.current) return;
-
-        const tl = gsap.timeline({
-            repeat: 1, // 2 cycles total (0 then 1)
-            onRepeat: () => setCycleCount(c => c + 1),
-            onComplete: () => {
-                gsap.to(containerRef.current, {
-                    opacity: 0,
-                    scale: 0.95,
-                    duration: 1.5,
-                    ease: "power2.inOut",
-                    onComplete: onComplete
-                });
-            }
-        });
-
-        // initial state
-        gsap.set(orbRef.current, { scale: 0.6, borderRadius: "50%" });
-        gsap.set(textRef.current, { opacity: 0 });
-
-        // Cycle animation
-        tl.call(() => { if (textRef.current) textRef.current.innerText = "Tarik Napas..." })
-            .to(textRef.current, { opacity: 1, duration: 1 }, 0)
-            .to(orbRef.current, {
-                scale: 1.2,
-                borderRadius: "40% 60% 70% 30% / 40% 50% 60% 50%",
-                duration: 4,
-                ease: "sine.inOut"
-            }, 0)
-            .to(textRef.current, { opacity: 0, duration: 1 }, 3)
-            // Exhale
-            .call(() => { if (textRef.current) textRef.current.innerText = "Hembuskan..." }, [], 4)
-            .to(textRef.current, { opacity: 1, duration: 1 }, 4)
-            .to(orbRef.current, {
-                scale: 0.6,
-                borderRadius: "50%",
-                duration: 5,
-                ease: "sine.inOut"
-            }, 4)
-            .to(textRef.current, { opacity: 0, duration: 1 }, 8);
-
-        return () => {
-            tl.kill();
-        };
-    }, [onComplete]);
-
-    const textColor = isDark ? "text-floral-white" : "text-pine-teal";
-    const orbColor = isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(21, 34, 27, 0.08)";
-    const orbShadow = isDark ? "rgba(255, 255, 255, 0.4)" : "rgba(21, 34, 27, 0.3)";
-
-    return (
-        <div ref={containerRef} className="flex flex-col items-center justify-center gap-16 w-full h-full relative">
-            <h2 ref={textRef} className={`text-5xl md:text-7xl font-heading italic tracking-wide opacity-0 absolute top-1/4 ${textColor}`}>
-                Tarik Napas...
-            </h2>
-
-            <div className="w-64 h-64 md:w-[400px] md:h-[400px] relative flex flex-col items-center justify-center pointer-events-none mt-10">
-                <div 
-                    ref={orbRef} 
-                    className="w-full h-full backdrop-blur-md transition-all duration-300"
-                    style={{ 
-                        backgroundColor: orbColor,
-                        boxShadow: `0 0 80px ${orbShadow}, inset 0 0 40px ${orbShadow}`
-                    }}
-                />
-            </div>
-
-            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
-                <div className="flex gap-3">
-                    <div className={`w-2.5 h-2.5 rounded-full transition-all duration-1000 ${cycleCount >= 0 ? 'opacity-100 bg-current scale-100' : 'opacity-30 border border-current scale-75'}`} style={{ color: isDark ? "#fff" : "#15221B" }}></div>
-                    <div className={`w-2.5 h-2.5 rounded-full transition-all duration-1000 ${cycleCount >= 1 ? 'opacity-100 bg-current scale-100' : 'opacity-30 border border-current scale-75'}`} style={{ color: isDark ? "#fff" : "#15221B" }}></div>
-                </div>
-                <span className={`text-xs font-body tracking-[0.3em] opacity-40 uppercase ${textColor}`}>
-                    Siklus Nafas
-                </span>
-            </div>
-        </div>
-    );
-}
-"use client";
-
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import Image from 'next/image';
@@ -119,11 +23,11 @@ export default function BreathingPhase({ onComplete, isDark }: BreathingPhasePro
     const textRef = useRef<HTMLHeadingElement>(null);
     const bgWindRef = useRef<HTMLDivElement>(null);
     const leavesRef = useRef<HTMLDivElement>(null);
-    
+
     // Exactly 2 winds as requested
     const wind2Ref = useRef<HTMLDivElement>(null);
     const wind3Ref = useRef<HTMLDivElement>(null);
-    
+
     // Energy Draw Particles
     const particlesRef = useRef<HTMLDivElement>(null);
 
@@ -133,16 +37,16 @@ export default function BreathingPhase({ onComplete, isDark }: BreathingPhasePro
         // --- Background Wind Sweep Effect ---
         const bgWindEls = Array.from(bgWindRef.current.children) as HTMLDivElement[];
         bgWindEls.forEach((el, i) => {
-            gsap.fromTo(el, 
+            gsap.fromTo(el,
                 { x: "-100vw", opacity: 0 },
-                { 
-                    x: "100vw", 
-                    opacity: 1, 
+                {
+                    x: "100vw",
+                    opacity: 1,
                     duration: 12 + Math.random() * 6,
-                    ease: "sine.inOut", 
-                    repeat: -1, 
-                    delay: Math.random() * 4, 
-                    yoyo: true 
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    delay: Math.random() * 4,
+                    yoyo: true
                 }
             );
         });
@@ -154,19 +58,19 @@ export default function BreathingPhase({ onComplete, isDark }: BreathingPhasePro
             const startY = 10 + Math.random() * 80; // 10vh to 90vh
             const endY = startY + (Math.random() * 60 - 30); // Drift wildly up or down up to 30vh
 
-            gsap.fromTo(el, 
+            gsap.fromTo(el,
                 { x: "-20vw", y: `${startY}vh`, rotation: Math.random() * -180, scale: Math.random() * 0.5 + 0.5, opacity: 0.8 },
-                { 
-                    x: "120vw", 
+                {
+                    x: "120vw",
                     y: `${endY}vh`,
                     rotation: 360 * (Math.random() > 0.5 ? 2 : -2), // Spin 2 times, randomly clockwise or counter
                     scale: Math.random() * 0.8 + 0.7,
-                    opacity: 0.9, 
-                    duration: 12 + Math.random() * 8, 
-                    ease: "sine.inOut", 
-                    repeat: -1, 
-                    delay: Math.random() * 12, 
-                    yoyo: false 
+                    opacity: 0.9,
+                    duration: 12 + Math.random() * 8,
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    delay: Math.random() * 12,
+                    yoyo: false
                 }
             );
         });
@@ -201,65 +105,65 @@ export default function BreathingPhase({ onComplete, isDark }: BreathingPhasePro
                 const startY = Math.sin(angle) * distance;
 
                 // Move smoothly and continuously to center (no stopping)
-                tl.fromTo(el, 
+                tl.fromTo(el,
                     { x: startX, y: startY, opacity: 0, scale: Math.random() * 0.5 + 0.5 },
                     { x: 0, y: 0, scale: 0, duration: 2, ease: "power2.in" }, // Fast suck at the end
                     startTime
                 )
-                // Fade in early, then fade out just before hitting exact center
-                .to(el, { opacity: Math.random() * 0.6 + 0.4, duration: 0.5 }, startTime)
-                .to(el, { opacity: 0, duration: 0.5 }, startTime + 1.5);
+                    // Fade in early, then fade out just before hitting exact center
+                    .to(el, { opacity: Math.random() * 0.6 + 0.4, duration: 0.5 }, startTime)
+                    .to(el, { opacity: 0, duration: 0.5 }, startTime + 1.5);
             });
         };
 
         // --- CYCLE 1: INHALE (hale_1 -> hale_3) ---
         tl.call(() => { if (textRef.current) textRef.current.innerHTML = "Tarik napas..." })
             .to(textRef.current, { opacity: 1, duration: 1 }, 0)
-            
+
             .set(frame1Ref.current, { opacity: 0 }, 1)
-            .set(frame3Ref.current, { opacity: 1 }, 1) 
-            
+            .set(frame3Ref.current, { opacity: 1 }, 1)
+
         animateEnergyDraw(0.5); // Add magical energy draw before peak inhale
 
         tl.to(textRef.current, { opacity: 0, duration: 1 }, 3)
-            
-        // --- CYCLE 1: EXHALE (hale_3 -> hale_2) ---
+
+            // --- CYCLE 1: EXHALE (hale_3 -> hale_2) ---
             .call(() => { if (textRef.current) textRef.current.innerHTML = "Hembuskan..." }, [], 4)
             .to(textRef.current, { opacity: 1, duration: 1 }, 4)
-            
+
             .set(frame3Ref.current, { opacity: 0 }, 5)
             .set(frame2Ref.current, { opacity: 1 }, 5) // Exhale swap
-            
+
             // Exhale Wind from Mouth (Sliding strictly left and right horizontally)
             .fromTo(wind2Ref.current, { opacity: 0, scale: 0.2, x: 0, y: 0 }, { opacity: 0.8, scale: 0.8, x: -80, y: 0, duration: 1.5, ease: "power2.out" }, 5)
             .fromTo(wind3Ref.current, { opacity: 0, scale: 0.2, x: 0, y: 0 }, { opacity: 0.8, scale: 0.8, x: 80, y: 0, duration: 1.5, ease: "power2.out" }, 5)
-            
+
             .to([wind2Ref.current, wind3Ref.current], { opacity: 0, duration: 1.5, ease: "power2.in" }, 6.5) // Fade ends gracefully
-            
+
             .to(textRef.current, { opacity: 0, duration: 1 }, 8)
 
-        // --- CYCLE 2: INHALE PREP (Sekali lagi...) ---
+            // --- CYCLE 2: INHALE PREP (Sekali lagi...) ---
             .call(() => { if (textRef.current) textRef.current.innerHTML = "Sekali lagi..." }, [], 9)
             .to(textRef.current, { opacity: 1, duration: 0.8 }, 9)
-            
+
             // Natural resting reset 
             .set(frame2Ref.current, { opacity: 0 }, 10)
             .set(frame1Ref.current, { opacity: 1 }, 10)
 
             .to(textRef.current, { opacity: 0, duration: 0.8 }, 10.5)
 
-        // --- CYCLE 2: INHALE (Tarik napas...) ---
+            // --- CYCLE 2: INHALE (Tarik napas...) ---
             .call(() => { if (textRef.current) textRef.current.innerHTML = "Tarik napas..." }, [], 11.5)
             .to(textRef.current, { opacity: 1, duration: 1 }, 11.5)
-            
+
             .set(frame1Ref.current, { opacity: 0 }, 12.5)
             .set(frame3Ref.current, { opacity: 1 }, 12.5)
 
         animateEnergyDraw(12.0); // Add second energy draw
-        
+
         tl.to(textRef.current, { opacity: 0, duration: 1 }, 14.5)
 
-        // --- CYCLE 2: EXHALE ---
+            // --- CYCLE 2: EXHALE ---
             .call(() => { if (textRef.current) textRef.current.innerHTML = "Hembuskan..." }, [], 15.5)
             .to(textRef.current, { opacity: 1, duration: 1 }, 15.5)
 
@@ -269,9 +173,9 @@ export default function BreathingPhase({ onComplete, isDark }: BreathingPhasePro
             // Exhale Wind Again (Sliding strictly left and right horizontally)
             .fromTo(wind2Ref.current, { opacity: 0, scale: 0.2, x: 0, y: 0 }, { opacity: 0.8, scale: 0.8, x: -80, y: 0, duration: 1.5, ease: "power2.out" }, 16.5)
             .fromTo(wind3Ref.current, { opacity: 0, scale: 0.2, x: 0, y: 0 }, { opacity: 0.8, scale: 0.8, x: 80, y: 0, duration: 1.5, ease: "power2.out" }, 16.5)
-            
+
             .to([wind2Ref.current, wind3Ref.current], { opacity: 0, duration: 1.5, ease: "power2.in" }, 18)
-            
+
             .to(textRef.current, { opacity: 0, duration: 1 }, 19.5);
 
         return () => {
@@ -286,23 +190,23 @@ export default function BreathingPhase({ onComplete, isDark }: BreathingPhasePro
 
     return (
         <div ref={containerRef} className="flex flex-col items-center justify-start w-full h-[100dvh] relative overflow-hidden pt-12 md:pt-24 pb-10">
-            
+
             {/* Background Wind Particles Render Layer */}
             <div ref={bgWindRef} className="absolute inset-0 pointer-events-none z-0">
                 {[...Array(5)].map((_, i) => (
-                    <div 
-                        key={`bg-wind-${i}`} 
+                    <div
+                        key={`bg-wind-${i}`}
                         className="absolute w-2/3 md:w-1/2 min-w-[300px]"
                         style={{
-                            top: `${15 + Math.random() * 70}%`, 
+                            top: `${15 + Math.random() * 70}%`,
                             color: bgWindColor
                         }}
                     >
                         {/* Wavy stroke brushed wind */}
                         <svg className="w-full h-auto drop-shadow-sm opacity-60" viewBox="0 0 400 40" fill="currentColor" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
                             <path d="M0,20 C100,0 300,40 400,20 C300,38 100,2 0,20 Z" />
-                            <path d="M50,30 C120,15 250,35 300,30 C250,33 120,17 50,30 Z" opacity="0.6"/>
-                            <path d="M150,15 C200,5 250,25 350,15 C250,22 200,8 150,15 Z" opacity="0.4"/>
+                            <path d="M50,30 C120,15 250,35 300,30 C250,33 120,17 50,30 Z" opacity="0.6" />
+                            <path d="M150,15 C200,5 250,25 350,15 C250,22 200,8 150,15 Z" opacity="0.4" />
                         </svg>
                     </div>
                 ))}
@@ -311,8 +215,8 @@ export default function BreathingPhase({ onComplete, isDark }: BreathingPhasePro
             {/* Flying Real Leaves Effect */}
             <div ref={leavesRef} className="absolute inset-0 pointer-events-none z-0">
                 {[...Array(6)].map((_, i) => (
-                    <div 
-                        key={`leaf-${i}`} 
+                    <div
+                        key={`leaf-${i}`}
                         className="absolute w-10 h-10 md:w-14 md:h-14 drop-shadow-md opacity-90"
                     >
                         <Image src={leaf} alt="Daun terbang" fill className="object-contain" />
@@ -321,10 +225,10 @@ export default function BreathingPhase({ onComplete, isDark }: BreathingPhasePro
             </div>
 
             {/* CENTERAL CONTAINER: Perfectly Aligned to start higher up near Navbar */}
-            <div className="flex flex-col items-center justify-start w-full max-w-lg z-10 gap-6 md:gap-10 relative">        
+            <div className="flex flex-col items-center justify-start w-full max-w-lg z-10 gap-6 md:gap-10 relative">
                 {/* Natural Document Flow Text */}
-                <h2 
-                    ref={textRef} 
+                <h2
+                    ref={textRef}
                     className={`text-4xl md:text-5xl lg:text-5xl font-geometric font-light tracking-wide opacity-0 ${textColor} text-center leading-relaxed px-4 min-h-[3rem]`}
                 >
                     Tarik Napas...
@@ -332,13 +236,13 @@ export default function BreathingPhase({ onComplete, isDark }: BreathingPhasePro
 
                 {/* Center Breathing Character */}
                 <div className="w-[300px] h-[300px] md:w-[450px] md:h-[450px] relative flex flex-col items-center justify-center pointer-events-none flex-none">
-                    
+
                     {/* Energy Draw Particles Center Anchored exactly at the Mouth/Upper Chest */}
                     <div className="absolute top-[26%] left-1/2 w-0 h-0 z-30 flex justify-center items-center pointer-events-none origin-center">
                         <div ref={particlesRef} className="absolute inset-0">
                             {[...Array(16)].map((_, i) => (
-                                <div 
-                                    key={`energy-dot-${i}`} 
+                                <div
+                                    key={`energy-dot-${i}`}
                                     className="absolute w-2 h-2 md:w-3 md:h-3 rounded-full bg-[#8DDEDE] shadow-[0_0_10px_#8DDEDE] opacity-0 block"
                                 />
                             ))}
@@ -358,7 +262,7 @@ export default function BreathingPhase({ onComplete, isDark }: BreathingPhasePro
 
                     {/* Exhale pearl-aqua winds blowing out from exactly the mouth */}
                     <div className="absolute top-[23%] left-1/2 w-0 h-0 z-20 flex justify-center items-center pointer-events-none origin-center">
-                        
+
                         {/* W2: Slides Left */}
                         <div ref={wind2Ref} className="absolute top-0 right-0 w-24 h-12 md:w-32 md:h-16 opacity-0 scale-x-[-1]">
                             <Image src={wind2} alt="W2" fill className="object-contain" />
@@ -373,7 +277,7 @@ export default function BreathingPhase({ onComplete, isDark }: BreathingPhasePro
 
                 </div>
             </div>
-            
+
         </div>
     );
 }

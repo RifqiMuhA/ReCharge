@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ReCharge
 
-## Getting Started
+## Institusi
+Politeknik Statistika STIS
 
-First, run the development server:
+## Anggota Tim
+- Ketua: Rifi Muhadzib Ahdan
+- Anggota 1: M. Rezky Raya Kilwouw
+- Anggota 2: Safira Inayah
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Deskripsi Karya
+Fenomena *burnout* di kalangan Generasi Z (Gen Z) akhir-akhir ini menjadi isu yang semakin sering terjadi dan membutuhkan perhatian serius. Ekspektasi yang tinggi, gaya hidup serba cepat, serta paparan informasi yang konstan seringkali membuat Gen Z rentan mengalami kelelahan mental maupun fisik secara berkelanjutan. Merespons fenomena yang terus berulang tersebut, pembuatan website **ReCharge** ini dilandasi oleh pemilihan subtema kesehatan dan kesejahteraan, yang secara khusus mengangkat isu *mental health*. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tujuan dari karya ini adalah untuk meningkatkan kesadaran (*awareness*) serta memberikan ruang interaktif dan validasi bagi Gen Z untuk mendeteksi, memahami, dan mencari cara penanganan *burnout* tersebut. Manfaat dari kehadiran website **ReCharge** diharapkan mampu menjadi media edukasi yang suportif dan relevan bagi anak muda, sehingga mereka bisa lebih tanggap terhadap kesehatan mental diri sendiri dan pelan-pelan dapat kembali berenergi (*recharge*) dalam menjalani aktivitas sehari-hari.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Link Website
+https://recharge-dev.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+---
 
-## Learn More
+## Prosedur Instalasi Akses Lokal
 
-To learn more about Next.js, take a look at the following resources:
+Berikut adalah langkah-langkah untuk menginstal dan menjalankan proyek **ReCharge** di komputer lokal:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone Repositori**
+   Buka terminal, lalu jalankan perintah berikut untuk mengunduh kode sumber:
+   ```bash
+   git clone <link-repository-anda>
+   cd ReCharge
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+2. **Instalasi Dependensi**
+   Pastikan perangkat Anda telah terinstal [Node.js](https://nodejs.org/). Instal semua dependensi yang dibutuhkan proyek (seperti React, Next.js, Framer Motion, TailwindCSS, dll.) dengan perintah:
+   ```bash
+   npm install
+   # Atau menggunakan package manager lain:
+   # yarn install
+   # pnpm install
+   ```
 
-## Deploy on Vercel
+3. **Menjalankan Server Pengembangan (Development Server)**
+   Setelah semua dependensi berhasil diinstal, jalankan server pengembangan dengan perintah:
+   ```bash
+   npm run dev
+   # Atau:
+   # yarn dev
+   # pnpm dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. **Akses Website**
+   Buka peramban (*browser*) Anda dan akses alamat [http://localhost:3000](http://localhost:3000). Website **ReCharge** akan langsung tampil dan Anda bisa menguji secara langsung berbagai fiturnya.
