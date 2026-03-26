@@ -103,7 +103,7 @@ export default function Navbar() {
                                 <Link
                                     key={link.name}
                                     href={link.path}
-                                    className={`cursor-none cursor-target px-5 py-1.5 rounded-xl font-tt-commons font-medium text-sm transition-all duration-300 ${isActive
+                                    className={`cursor-target px-5 py-1.5 rounded-xl font-tt-commons font-medium text-sm transition-all duration-300 ${isActive
                                         ? 'bg-pine-teal text-floral-white shadow-md'
                                         : 'text-pine-teal hover:bg-pine-teal/10'
                                         }`}
@@ -174,10 +174,10 @@ export default function Navbar() {
                         Kenali Batas. Sebelum Terlambat.
                     </p>
                     <div className="flex gap-6">
-                        <Link href="https://twitter.com" className="text-pine-teal hover:text-white transition-colors cursor-none cursor-target" aria-label="X (Twitter)">
+                        <Link href="https://twitter.com" className="text-pine-teal hover:text-white transition-colors cursor-target" aria-label="X (Twitter)">
                             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.961h-1.91z"></path></svg>
                         </Link>
-                        <Link href="https://instagram.com" className="text-pine-teal hover:text-white transition-colors cursor-none cursor-target" aria-label="Instagram">
+                        <Link href="https://instagram.com" className="text-pine-teal hover:text-white transition-colors cursor-target" aria-label="Instagram">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
                         </Link>
                     </div>
