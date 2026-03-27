@@ -932,10 +932,7 @@ export default function ContentPage() {
         {/* ── STACKING CARDS SECTION (SELECTED NARRATIVES) ── */}
         <StackingCards images={images} />
 
-        {/* ── SECTION BERIKUTNYA SEPERTI HERO (PUTIH/BEIGE) ── */}
-        <section className="w-full h-screen bg-[#F5F5ED] relative z-10 flex flex-col items-center justify-center border-t border-pine-teal/20">
-          <h2 className="text-3xl md:text-5xl font-geometric text-pine-teal">FOOTER / NEXT SECTION</h2>
-        </section>
+
 
       </main>
     </ReactLenis>
