@@ -136,8 +136,8 @@ function Bubble({ bubble, scrollYProgress }: { bubble: BubbleConfig; scrollYProg
 export default function SequenceScroll() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
 
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
   const [loadedCount, setLoadedCount] = useState(0);
 
   const { scrollYProgress } = useScroll({
@@ -148,21 +148,30 @@ export default function SequenceScroll() {
   // Load images
   useEffect(() => {
     let unmounted = false;
-    const loadedImages: HTMLImageElement[] = [];
+    let loaded = 0;
+    
+    // Pre-populate array to avoid out-of-bounds
+    const imgArray = new Array(FRAME_COUNT).fill(null);
+    imagesRef.current = imgArray;
 
-    const loadImages = async () => {
+    const loadImages = () => {
       for (let i = 1; i <= FRAME_COUNT; i++) {
         const img = new Image();
         img.src = `/sequence/frame-${i}.jpg`;
-        await new Promise((resolve) => {
-          img.onload = resolve;
-          img.onerror = resolve;
-        });
-        if (unmounted) return;
-        loadedImages.push(img);
-        setLoadedCount(loadedImages.length);
+        
+        const handleLoad = () => {
+          if (unmounted) return;
+          loaded++;
+          setLoadedCount(loaded);
+          // If this is the current frame, we might want to trigger a redraw, but scroll handles most.
+        };
+
+        img.onload = handleLoad;
+        img.onerror = handleLoad;
+        
+        // Store in ref array at the correct index (0-based)
+        imgArray[i - 1] = img;
       }
-      setImages(loadedImages);
     };
 
     loadImages();
@@ -218,18 +227,22 @@ export default function SequenceScroll() {
     // Current subscription
     const unsubscribe = currentFrameIndex.on('change', (latest) => {
       const idx = Math.floor(latest);
-      if (images[idx]) {
-        drawToCanvas(images[idx]);
+      const img = imagesRef.current[idx];
+      if (img && img.complete && img.naturalHeight !== 0) {
+        drawToCanvas(img);
       }
     });
 
-    if (images[0] && currentFrameIndex.get() === 0) {
-      drawToCanvas(images[0]);
+    const currentIdx = Math.floor(currentFrameIndex.get() || 0);
+    const initialImg = imagesRef.current[currentIdx];
+    if (initialImg && initialImg.complete && initialImg.naturalHeight !== 0) {
+      drawToCanvas(initialImg);
     }
 
     const onResize = () => {
       const idx = Math.floor(currentFrameIndex.get());
-      if (images[idx]) drawToCanvas(images[idx]);
+      const img = imagesRef.current[idx];
+      if (img && img.complete && img.naturalHeight !== 0) drawToCanvas(img);
     };
 
     window.addEventListener('resize', onResize);
@@ -237,7 +250,7 @@ export default function SequenceScroll() {
       unsubscribe();
       window.removeEventListener('resize', onResize);
     };
-  }, [images, currentFrameIndex]);
+  }, [currentFrameIndex]);
 
   // Overlays and Effects
   const [minTimeElapsed, setMinTimeElapsed] = useState(false);
