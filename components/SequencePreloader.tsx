@@ -12,8 +12,12 @@ interface PreloaderProps {
 }
 
 export default function SequencePreloader({ isLoaded, loadedCount, totalFrames }: PreloaderProps) {
-  const targetProgress = totalFrames > 0 ? (loadedCount / totalFrames) * 100 : 0;
+  const calculatedProgress = totalFrames > 0 ? (loadedCount / totalFrames) * 100 : 0;
+  // If parent says isLoaded, force the progress to hit 100% smoothly
+  const targetProgress = isLoaded ? 100 : calculatedProgress;
+  
   const [displayProgress, setDisplayProgress] = useState(0);
+  const [shouldExit, setShouldExit] = useState(false);
   
   // Framer Motion spring for smooth number and bar animation (simulating real load)
   const springProgress = useSpring(0, { stiffness: 45, damping: 20 });
@@ -25,12 +29,16 @@ export default function SequencePreloader({ isLoaded, loadedCount, totalFrames }
   useEffect(() => {
     return springProgress.on('change', (latest) => {
       setDisplayProgress(latest);
+      // Wait until the spring animation actually reaches ~100% before exiting
+      if (isLoaded && latest >= 99.8) {
+        setShouldExit(true);
+      }
     });
-  }, [springProgress]);
+  }, [springProgress, isLoaded]);
 
   return (
     <AnimatePresence mode="wait">
-      {!isLoaded && (
+      {!shouldExit && (
         <motion.div
           key="preloader"
           initial={{ opacity: 1 }}
@@ -75,7 +83,7 @@ export default function SequencePreloader({ isLoaded, loadedCount, totalFrames }
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
               className="text-[14vw] md:text-[10vw] font-tt-commons font-bold text-blush-pop tracking-tighter leading-none drop-shadow-sm"
             >
-              {Math.round(displayProgress)}%
+              {shouldExit ? 100 : Math.round(displayProgress)}%
             </motion.div>
           </div>
 
@@ -92,7 +100,7 @@ export default function SequencePreloader({ isLoaded, loadedCount, totalFrames }
             <div className="w-full h-1.5 bg-blush-pop/10 rounded-full overflow-hidden shadow-inner">
               <motion.div
                 className="h-full bg-blush-pop rounded-full shadow-[0_0_10px_rgba(255,171,210,0.8)]"
-                style={{ width: `${displayProgress}%` }}
+                style={{ width: `${shouldExit ? 100 : displayProgress}%` }}
               />
             </div>
           </div>
